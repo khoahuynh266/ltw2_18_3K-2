@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= title %></title>
+</head>
+<table width = "500" border ="0" align = "center">
+	<form action="" method="GET">                   
+	<td><h1 align = "left"><%= title %></h1><br></td>
+		<tr> 
+		  <td>Số thứ 1: </td>
+		  <td><input type="text" name="a" id="a" value='<%= a %>'></td>
+		  <td><input type = "radio" name = "operator" id="cong" value = "+"> Cộng</td>
+		  <td><input type = "radio" name = "operator" id="tru" value = "-"> Trừ</td>
+		</tr><br>
+		 
+		  <tr> 
+		  <td> Số thứ 2:</td> 
+		  <td><input type="text" name="b" id="b" value='<%= b %>'></td>
+		  <td><input type = "radio" name = "operator" id="nhan" value = "*"> Nhân</td>
+		  <td><input type = "radio" name = "operator" id="chia" value = "/"> Chia </td>
+		</tr><br>
+		 
+		<tr> 
+		  <td>Kết quả :</td>
+		  <td><input type="text" name="kq" id="kq" value='<%= kq %>'disabled></td>
+		  <td> <input type="submit" value="Tính" name="tinh" id="tinh"></td>
+		</tr> 
+
+		<tr>
+		 <td>Thông Báo :</td> <td><span style="color: red" hidden id="thongbao">Chưa nhập đủ thông tin</span></td>
+		</tr> 
+</form>
+	</table> 
+
+
+    <script type="text/javascript" src="js/script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>
