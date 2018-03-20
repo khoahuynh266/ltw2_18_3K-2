@@ -1,11 +1,9 @@
-const express = require('express')
-const router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-router.get('/',(req,res)=>res.render('index',{title: 'Bé Tập Tính Ajax',a: '',b: '',kq: ''}))
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
 
-router.post('/',(req,res,next)=>{
-    var kq = eval(req.body.a + req.body.operator + req.body.b) 
-    res.render('index',{title:'Bé Tập Tính Ajax',a: req.body.a,b: req.body.b,kq})
-})
-
-module.exports = router
+module.exports = router;
