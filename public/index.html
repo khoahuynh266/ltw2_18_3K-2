@@ -94,6 +94,7 @@
     </div>
 </footer>
 <!-- Create Modal -->
+<!--================================================== -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -124,6 +125,63 @@
       </div>
     </div>
     </div>
+
+<!-- Delete Modal -->
+<!--================================================== -->
+<div class="modal" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Delete-Modal">Delete a celebrity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="description"><h6>Are you sure?</h6></label><br>
+                        Do you really want to delete these records? This process cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id ="btnDelete" delete-id ="#">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Update Modal -->
+<!--================================================== -->
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Update-Modal">Update a celebrity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="update-name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="image-link">Image link</label>
+                    <input type="text" class="form-control" name="imagelink" id="update-image-link">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="update-description" name="description">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id ="btnUpdate"  update-id ="#">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -137,18 +195,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
+<!--================================================== -->
+
 <script id="celebrity-template" type="text/x-handlebars-template">
-    <div class="col-md-4">
+    <div class="col-md-4" Card-Id ="{{id}}" style="width: 18rem">
         <div class="card mb-4 box-shadow">
             <img class="card-img-top"
-                 src="{{image_url}}"
+                 src="{{image_url}}" onerror ="this.src ='http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'"
                  alt="Card image cap">
             <div class="card-body">
-                <p class="card-text">{{name}}</p>
+                <h5><p class="card-text">{{name}}</p></h5>
+                <p class="card-text">{{description}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary" id = "update-celebrity">Edit</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" id ="delete-celebrity" value ="{{id}}">Delete</button>
+                        <button type="button" class="btn btn-sm btn-outline-info update-celebrity-class"  value ="{{id}}">Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger delete-celebrity-class"  value ="{{id}}" >Delete</button>
                     </div>
                     <small class="text-muted">9 mins</small>
                 </div>
@@ -182,41 +243,62 @@
 
         }
     );
-    $("#delete-celebrity").on(
-        'click',
-        function (evt) {
-            var id = $('#delete-celebrity').val();
+
+    $(document).on('click', '.delete-celebrity-class',function (evt){
+        var id = $(this).attr("value");
+        $("#btnDelete").attr("delete-id", id);
+        $("#DeleteModal").modal('toggle');
+
+    });
+
+        $('#btnDelete').on('click', function (evt) {
+
+            var id = $(this).attr("delete-id");
             $.ajax({
                 type: "DELETE",
-                url: "api/celebrities" + id,
+                url: "api/celebrities/" + id,
                 success: function (data) {
                     refresh();
                 }
             });
+        });
 
-        }
-    );
 
-$('#update-celebrity').on(
-        'click',
-        function (evt) {
-            var id = $('#celebrityId').val();
+    $(document).on('click', '.update-celebrity-class',function (evt){
+        var id = $(this).attr("value");
+
             $.ajax({
-                type: "Put",
-                url: "api/celebrities/"+ id,
-                data: JSON.stringify({
-                    image_url: $("#image-link").val(),
-                    name: $("#name").val(),
-                    description: $("#description").val()
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    refresh();
+                type: "GET",
+                url: "api/celebrities/"+id,
+                success : function(data){
+                    $('#update-name').val(data[0].name);
+                    $('#update-image-link').val(data[0].image_url);
+                    $('#update-description').val(data[0].description);
+                    $('#btnUpdate').attr("update-id",id);
+                    $('#UpdateModal').modal('toggle');
                 }
             });
+    });
 
-        }
-    );
+    $('#btnUpdate').on('click', function (evt) {
+
+        var id = $(this).attr("update-id");
+        $.ajax({
+            type: "PUT",
+            url: "api/celebrities/" + id,
+            data: JSON.stringify({
+                image_url: $("#iupdate-mage-link").val(),
+                name: $("#update-name").val(),
+                description: $("#update-description").val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                refresh();
+            }
+        });
+    });
+
+
     function refresh(){
         $.getJSON("api/celebrities", function (data) {
             var items = "";
