@@ -5,7 +5,7 @@ var pool      =    mysql.createPool({
     connectionLimit : 10,
     host     : 'sql211.epizy.com',
     user     : 'epiz_21816598',
-    password : 'ninakhoa',
+    password : 'x98kDQuUUdtO',
     database : 'epiz_21816598_tuan05',
     debug    :  false
 });
