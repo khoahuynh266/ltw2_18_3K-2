@@ -3,10 +3,10 @@ var mysql = require('mysql');
 // Initialize pool
 var pool      =    mysql.createPool({
     connectionLimit : 10,
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : 'lovekieutrinh97',
-    database : 'showbiz',
+    host     : 'sql211.epizy.com',
+    user     : 'epiz_21816598',
+    password : 'lovekieutrinh97'
+    database : 'epiz_21816598_tuan05',
     debug    :  false
 });
 module.exports = pool;
