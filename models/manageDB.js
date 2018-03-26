@@ -37,23 +37,3 @@ exports.executeQuery = function (query, data, callback) {
         // });
     });
 }
-
-exports.executeQuery = function (query, data,data2, callback) {
-    pool.getConnection(function (err, connection) {
-        if (err) {
-            if (connection)
-                connection.release();
-            callback(err)
-            return;
-        }
-        connection.query(query, data,data2, function (err, rows) {
-            connection.release();
-            if (!err) {
-                callback(null, rows);
-            }
-        });
-        // connection.on('error', function (err) {
-        //     callback(err)
-        // });
-    });
-}
