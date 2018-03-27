@@ -93,39 +93,39 @@
             started guide</a>.</p>
     </div>
 </footer>
-<!-- Create Modal -->
-<!--================================================== -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add new celebrity</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-            <label for="name">Name</label>
-             <input type="text" class="form-control" id="name" name="name">
-            </div>
-        <div class="form-group">
-          <label for="image-link">Image link</label>
-          <input type="text" class="form-control" name="imagelink" id="image-link">
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" class="form-control" id="description" name="description">
-        </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id ="add-celebrity">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
 
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new celebrity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" onfocus="this.value=''" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="image-link">Image link</label>
+                    <input type="text" class="form-control" onfocus="this.value=''" name="imagelink" id="image-link">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" onfocus = "this.value=''" id="description" name="description">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id ="add-celebrity">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Delete Modal -->
 <!--================================================== -->
 <div class="modal" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,7 +140,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="description"><h6>Are you sure?</h6></label><br>
-                        Do you really want to delete these records? This process cannot be undone.
+                    Do you really want to delete these records? This process cannot be undone.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="form-group">
                     <label for="image-link">Image link</label>
-                    <input type="text" class="form-control" name="imagelink" id="update-image-link">
+                    <input type="text" class="form-control" name="image-link" id="update-image-link">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -182,6 +182,7 @@
         </div>
     </div>
 </div>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -194,7 +195,6 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-
 <!--================================================== -->
 
 <script id="celebrity-template" type="text/x-handlebars-template">
@@ -251,33 +251,33 @@
 
     });
 
-        $('#btnDelete').on('click', function (evt) {
+    $('#btnDelete').on('click', function (evt) {
 
-            var id = $(this).attr("delete-id");
-            $.ajax({
-                type: "DELETE",
-                url: "api/celebrities/" + id,
-                success: function (data) {
-                    refresh();
-                }
-            });
+        var id = $(this).attr("delete-id");
+        $.ajax({
+            type: "DELETE",
+            url: "api/celebrities/" + id,
+            success: function (data) {
+                refresh();
+            }
         });
+    });
 
 
     $(document).on('click', '.update-celebrity-class',function (evt){
         var id = $(this).attr("value");
 
-            $.ajax({
-                type: "GET",
-                url: "api/celebrities/"+id,
-                success : function(data){
-                    $('#update-name').val(data[0].name);
-                    $('#update-image-link').val(data[0].image_url);
-                    $('#update-description').val(data[0].description);
-                    $('#btnUpdate').attr("update-id",id);
-                    $('#UpdateModal').modal('toggle');
-                }
-            });
+        $.ajax({
+            type: "GET",
+            url: "api/celebrities/"+id,
+            success : function(data){
+                $('#update-name').val(data[0].name);
+                $('#update-image-link').val(data[0].image_url);
+                $('#update-description').val(data[0].description);
+                $('#btnUpdate').attr("update-id",id);
+                $('#UpdateModal').modal('toggle');
+            }
+        });
     });
 
     $('#btnUpdate').on('click', function (evt) {
@@ -287,7 +287,7 @@
             type: "PUT",
             url: "api/celebrities/" + id,
             data: JSON.stringify({
-                image_url: $("#iupdate-mage-link").val(),
+                image_url: $("#update-image-link").val(),
                 name: $("#update-name").val(),
                 description: $("#update-description").val()
             }),
@@ -309,7 +309,6 @@
             $("#celebrities-group").html(items);
         });
     }
-
 </script>
 </body>
 </html>

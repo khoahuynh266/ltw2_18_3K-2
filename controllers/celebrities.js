@@ -35,7 +35,7 @@ exports.findOne = function(req, res) {
 
             if(!data) {
                 return res.status(404).send({message: "celebrities not found with id " + req.params.celebrityId});
-        }
+            }
 
         }
         res.send(data);
@@ -46,7 +46,7 @@ exports.update = function(req, res) {
     // Update a celebrities identified by the celebrityId in the request
 
     var updates = req.body;
-        updates.id = req.params.celebrityId;
+    updates.id = req.params.celebrityId;
     celebritiesModel.update(updates, function (err, data) {
         if (err) {
             res.status(500).send({message: "Could not update celebrities with id " + req.params.celebrityId});

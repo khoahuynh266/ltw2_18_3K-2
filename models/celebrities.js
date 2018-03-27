@@ -11,7 +11,7 @@ exports.findOne = function (celebrityId,callback) {
     db.executeQuery("SELECT * FROM `showbiz`.`celebrities` WHERE id = ?",celebrityId, callback);
 }
 exports.delete = function (celebrityId,callback) {
-    db.executeQuery("DELETE FROM `showbiz`.`celebrities` where id = ? ",celebrityId, callback);
+    db.executeQuery("DELETE FROM `showbiz`.`celebrities` WHERE id = ? ",celebrityId, callback);
 }
 exports.update = function (celebrity,callback) {
     db.executeQuery("UPDATE `showbiz`.`celebrities` SET ? WHERE `id` =?;",[celebrity,celebrity.id], callback);
