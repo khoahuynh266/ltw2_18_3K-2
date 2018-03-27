@@ -5,14 +5,14 @@ exports.findAll = function (callback) {
 }
 
 exports.create = function(celebrity, callback){
-    db.executeQuery("INSERT INTO `showbiz`.`celebrities` SET ?", celebrity, callback);
+    db.executeQuery("INSERT INTO `celebrities` SET ?", celebrity, callback);
 }
 exports.findOne = function (celebrityId,callback) {
-    db.executeQuery("SELECT * FROM `showbiz`.`celebrities` WHERE id = ?",celebrityId, callback);
+    db.executeQuery("SELECT * FROM `celebrities` WHERE id = ?",celebrityId, callback);
 }
 exports.delete = function (celebrityId,callback) {
-    db.executeQuery("DELETE FROM `showbiz`.`celebrities` WHERE id = ? ",celebrityId, callback);
+    db.executeQuery("DELETE FROM `celebrities` WHERE id = ? ",celebrityId, callback);
 }
 exports.update = function (celebrity,callback) {
-    db.executeQuery("UPDATE `showbiz`.`celebrities` SET ? WHERE `id` =?;",[celebrity,celebrity.id], callback);
+    db.executeQuery("UPDATE `celebrities` SET ? WHERE `id` =?;",[celebrity,celebrity.id], callback);
 }
