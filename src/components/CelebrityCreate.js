@@ -92,7 +92,7 @@ class CelebrityCreate extends React.Component {
     //             console.log(error)
     //         })
     // }
-   
+
     render() {
         return (
             <div id = "created">
