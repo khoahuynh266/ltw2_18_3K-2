@@ -2,11 +2,11 @@
 var mysql = require('mysql');
 // Initialize pool
 var pool      =    mysql.createPool({
-    connectionLimit : 30,
-    host     : 'sql9.freemysqlhosting.net',
-    user     : 'sql9228811',
-    password : '1CiQDPBCGB',
-    database : 'sql9228811',
+    connectionLimit : 100,
+    host     : 'localhost',
+    user     : 'root',
+    password : 'lovekieutrinh97',
+    database : 'showbiz',
     debug    :  false
 });
 module.exports = pool;
