@@ -43,6 +43,7 @@ class CelebrityCreate extends React.Component {
         e.preventDefault()
         fetch("https://tuan05-1560266.herokuapp.com/api/celebrities",
             {
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -53,6 +54,10 @@ class CelebrityCreate extends React.Component {
                     'image_url': this.state.image_url,
                     'description': this.state.description
                 }),
+                mode: 'cors', // no-cors, cors, *same-origin
+                redirect: 'follow', // manual, *follow, error
+                referrer: 'no-referrer',// *client, no-referrer
+
             })
             .then(
                 (result) => {
