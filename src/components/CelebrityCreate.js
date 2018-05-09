@@ -39,11 +39,11 @@ class CelebrityCreate extends React.Component {
         }
 
 
-    handleSubmit = () => {
-       // e.preventDefault()
+    handleSubmit = (e) => {
+        e.preventDefault()
         fetch("https://tuan05-1560266.herokuapp.com/api/celebrities",
             {
-                method: 'post',
+                method: 'POST',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -92,17 +92,7 @@ class CelebrityCreate extends React.Component {
     //             console.log(error)
     //         })
     // }
-    openModal = () => {
-        this.setState({modalIsOpen: true});
-    }
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
-    }
-    onClose = () => {
-        this.closeModal();
-        window.parent.location = window.parent.location.href;
-    }
-
+   
     render() {
         return (
             <div id = "created">
