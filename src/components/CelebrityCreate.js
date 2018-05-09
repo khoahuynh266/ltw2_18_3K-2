@@ -43,7 +43,7 @@ class CelebrityCreate extends React.Component {
         e.preventDefault()
         fetch("https://tuan05-1560266.herokuapp.com/api/celebrities",
             {
-                credentials: 'include',
+                credentials: 'omit',
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
