@@ -399,6 +399,7 @@ a:focus {
  */
 .main-sidebar,
 .left-side {
+  background-color: #000000;
   position: absolute;
   top: 0;
   left: 0;
@@ -510,7 +511,8 @@ a:focus {
 }
 .sidebar-menu li.header {
   padding: 10px 25px 10px 15px;
-  font-size: 12px;
+  font-size: 14px;
+  color: #FFFFFF;
 }
 .sidebar-menu li > a > .fa-angle-left {
   width: auto;

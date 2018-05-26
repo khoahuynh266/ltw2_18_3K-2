@@ -5,10 +5,10 @@ const Err = () => (
     <div>
 
         <h4 className="text-center bold size24 margin0auto">
-            <img src="https://cdn0.iconfinder.com/data/icons/emoticons-round-smileys/137/Emoticons-14-512.png" className="w250h250"/>
-            <p>You dont' have a token !(</p>
-            <p className="fontcolor">Sign in you will get it</p>
-            <Link to="/home/login">Back</Link>
+            <p> <h1>Error!!!</h1></p>
+            <img src="https://www.cheatsheet.com/wp-content/uploads/2016/06/Astonished-face-emoji-meanings.png?x23912" className="err"/>
+            <p> <h3>Something went wrong.</h3></p>
+            <Link to="/home/login">Back to login</Link>
         </h4>
 
     </div>

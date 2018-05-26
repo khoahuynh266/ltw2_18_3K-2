@@ -3,6 +3,7 @@ import './App.css';
 import { Switch , Route, Link } from 'react-router-dom';
 import Header from './components/Header';
 import SideBar from './components/Sidebar';
+import Content from "./components/Content";
 
 class App extends React.Component {
     constructor(props) {
@@ -15,7 +16,6 @@ class App extends React.Component {
          <div>
                 <Header/>
                 <SideBar/>
-
              </div>
         );
     }
