@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link ,Route, Switch} from 'react-router-dom';
 import Content from "./Content";
 
-import SideBar from './Sidebar';
 export default class Sidebar extends Component {
     render(){
         return (
@@ -51,22 +50,22 @@ export default class Sidebar extends Component {
                                 <li><Link to="#"><i className="fa fa-circle-o"></i> Phone</Link></li>
                             </ul>
                         </li>
-                        <Link to="/">
+
+                        <li>
+                        <Link to="/user">
                             <i className="fa fa-pie-chart"></i>
-                            <span>Loại sản phẩm</span>
+                            <span>User</span>
                             <span className="pull-right-container">
                             <i className="fa fa-angle-left pull-right"></i>
                             </span>
                         </Link>
+                        </li>
                     </ul>
                 </section>
 
             </aside>
                 <Switch>
-        <Route path="/product" component={Content}/>
         <Route path="/" component={Content}/>
-        <Route path="/admin" component={Content}/>
-       <Route path="/" component={Content}/>
                 </Switch>
             </div>
         )

@@ -29,7 +29,7 @@ class AllUser extends React.Component {
         else {
             return (
                     <section className="content-header">
-                        <h3 className=" fontcolor text-center">">Quản lý người dùng</h3>
+                        <h3 className=" fontcolor text-center">Quản lý người dùng</h3>
                         <p className="text-center"><UserAdd handleAfterAdd={this.handleAfterAdd}/></p>
                         <div className="hover-yellow">
                             <UserList/>

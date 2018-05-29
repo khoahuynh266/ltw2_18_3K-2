@@ -35,7 +35,7 @@ class UserList extends React.Component {
         });
     }
     handleAfterAdd(){
-        fetch("http://localhost:3001/api/users/")
+        fetch("http://localhost:3001/users/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -54,7 +54,7 @@ class UserList extends React.Component {
     }
 
     Delete = (key) => {
-        fetch("http://localhost:3001/api/user/:key",
+        fetch("http://localhost:3001/user/:key",
             {
                 method: 'delete',
                 headers: {
@@ -79,7 +79,7 @@ class UserList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/api/users")
+        fetch("http://localhost:3001/users")
             .then(res => res.json())
             .then(
                 (result) => {

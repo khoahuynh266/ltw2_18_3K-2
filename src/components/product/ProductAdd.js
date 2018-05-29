@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 
 class ProductAdd extends React.Component {
     constructor(props) {
@@ -50,15 +50,20 @@ class ProductAdd extends React.Component {
         e.preventDefault()
         fetch("http://localhost:3001/api/Product",
             {
-                method: 'post',
+                method: 'POST',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    'name': this.state.name,
-                    'image_url': this.state.image_url,
-                    'description': this.state.description
+                    "tensp": this.ten,
+                    "loai": this.loai,
+                    "mota": this.mota,
+                    "gia":  this.gia,
+                    "id_nsx": this.nsx,
+                    "soluong":this.soluong,
+                    "xuatsu": this.xuatsu,
+                  // "image_url": this.state.image_url
 
                 }),
             })
@@ -98,14 +103,18 @@ class ProductAdd extends React.Component {
                                     <input ref={input => this.ten = input}  type="text" className="form-control" name="ten" placeholder="..."/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="Mota" className="bold">Mô tả nhỏ</label>
+                                    <label htmlFor="Loai" className="bold">Loại</label>
+                                    <input  ref={input => this.loai = input} type="text" className="form-control" name="loai" placeholder="1"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Mota" className="bold">Mô tả </label>
                                     <input type="text" ref={input => this.mota = input} className="form-control " name="mota" placeholder="..."/>
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="Des"  className="control-label bold">Chi tiết</label>
+                                    <label htmlFor="xuatxu"  className="control-label bold">Xuất xứ</label>
                                     <div className="col-sm-12">
-                                          <textarea rows="4" id="des" name="des" ref={input => this.des = input}
+                                          <textarea rows="4" id="xuatxu" name="xuatxu" ref={input => this.des = input}
                                                     className="form-control"/>
                                     </div>
                                 </div>

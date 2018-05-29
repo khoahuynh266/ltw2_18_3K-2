@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 class UserAdd extends React.Component {
     constructor(props) {
@@ -83,7 +83,7 @@ class UserAdd extends React.Component {
 
     render() {
         return (
-          <div>  <button  className="btn btn-primary my-2" onClick={this.handleShow}>Thêm sản phẩm</button>
+          <div>  <button  className="btn btn-primary my-2" onClick={this.handleShow}>Thêm user </button>
             <div>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -99,7 +99,7 @@ class UserAdd extends React.Component {
                             <div className="form-group">
                                 <label htmlFor="image-link">Image link</label>
                                 <input type="text" className="form-control" value={this.state.image_url} name="image_url"
-                                       id="image-link" onChange={this.handleChangeImage} />
+                                           id="image-link" onChange={this.handleChangeImage} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
