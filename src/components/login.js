@@ -123,7 +123,7 @@ class Login extends React.Component {
                         </span>
                             </div>
                             <div className="wrap-input100 validate-input" data-validate = "Email is required">
-                                <input className="input" ref={input => this.email = input} name="email" placeholder="email"
+                                <input className="input100" ref={input => this.email = input} name="email" placeholder="email"
                                        required="required"/>
                                 <span className="focus-input100"></span>
                             </div>
@@ -138,7 +138,7 @@ class Login extends React.Component {
                                 </a>
                             </div>
                             <div className="wrap-input100 validate-input" data-validate = "Password is required">
-                                <input className="input" type="password" ref={input => this.password = input} name="password" placeholder="Password"
+                                <input className="input100" type="password" ref={input => this.password = input} name="password" placeholder="Password"
                                        required="required" />
                                 <span className="focus-input100"></span>
                             </div>

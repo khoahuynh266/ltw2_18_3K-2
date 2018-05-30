@@ -7,7 +7,7 @@ class ModalDelete extends Component{
         super(props, context);
 
     }
-Delete (){
+    Delete (){
     this.props.Delete();
 }
     render() {

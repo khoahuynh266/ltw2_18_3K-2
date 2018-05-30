@@ -20,25 +20,46 @@ class AllUser extends React.Component {
     }
 
     render() {
-        var token = window.localStorage.getItem('access_token');
-        if (!token) {
+        // var token = window.localStorage.getItem('access_token');
+        // if (!token) {
+        //     return (
+        //         <Error/>
+        //     )
+        // }
+        // else {
             return (
-                <Error/>
-            )
-        }
-        else {
-            return (
-                    <section className="content-header">
-                        <h3 className=" fontcolor text-center">Quản lý người dùng</h3>
-                        <p className="text-center"><UserAdd handleAfterAdd={this.handleAfterAdd}/></p>
-                        <div className="hover-yellow">
-                            <UserList/>
+                <section className="content-header">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="box">
+                                <div className="box-header with-border">
+                                    <h3 className="box-title fontcolor text-center">Quản lý người dùng</h3>
+                                    <p className="text-center"><UserAdd handleAfterAdd={this.handleAfterAdd}/></p>
+                                </div>
+                                <div className="box-body">
+                                    <div className="row">
+                                        <p style={{margin: 15, border:1 ,solid :'black'}}>
+                                        <div className="hover-yellow">
 
+
+                            <UserList/>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="box-footer">
+                                    <div className="row">
+                                        <div className="col-sm-3 col-xs-6">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
             );
-        }
+        //}
     }
 }
 

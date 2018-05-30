@@ -1,24 +1,31 @@
-import React from "react";
+import React, {Component} from "react";
 import { Modal } from 'react-bootstrap';
-
-class UserAdd extends React.Component {
-    constructor(props) {
-        super(props);
+import { Link ,Route} from 'react-router-dom';
+class UserAdd extends Component {
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             show: false,
             name: '',
-            image_url: '',
-            description: '',}
+            password: '',
+            phone: '',
+            email: '',}
+
 
         this.handleShow = this.handleShow.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleChangeName = this.handleChangeName.bind(this)
-        this.handleChangeImage = this.handleChangeImage.bind(this)
-        this.handleChangeDescription = this.handleChangeDescription.bind(this)
+        this.handleChangeEmail = this.handleChangeEmail.bind(this)
+        this.handleChangePassword= this.handleChangePassword.bind(this)
+        this.handleChangePhone = this.handleChangePhone.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
     }
 
+    handleChangeEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
     handleClose() {
         this.setState({ show: false });
     }
@@ -33,52 +40,45 @@ class UserAdd extends React.Component {
             })
         }
 
-        handleChangeImage = (e) => {
+        handleChangePassword = (e) => {
             this.setState({
-                image_url: e.target.value
+                password: e.target.value
             })
         }
 
-        handleChangeDescription = (e) => {
+        handleChangePhone = (e) => {
             this.setState({
-                description: e.target.value
+                phone: e.target.value
             })
         }
 
 
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3001/api/User",
+        fetch("http://localhost:3001/api/users",
             {
                 method: 'post',
+                mode: 'cors', // no-cors, cors, *same-origin
                 headers: {
-                    Accept: 'application/json',
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    'name': this.state.name,
-                    'image_url': this.state.image_url,
-                    'description': this.state.description
+                    'fullname': this.state.name,
+                    'email': this.state.email,
+                    'password': this.state.password,
+                    'phone': this.state.phone
 
                 }),
-            })
-            .then(
-                (result) => {
-                    this.setState({
-                        show: false,
-                    });
-                    this.props.handleAfterAdd();
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        error
-                    });
-                }
-            );
 
+            })
+            .catch(function (error) {
+                            console.log(error)
+                        })
+            .then(res => {
+                this.setState({show: false});
+                //this.props.handleAfterAddUser();
+            })
     }
 
     render() {
@@ -86,25 +86,29 @@ class UserAdd extends React.Component {
           <div>  <button  className="btn btn-primary my-2" onClick={this.handleShow}>Thêm user </button>
             <div>
 
-                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal  handleAfterAddUser = {() => this.props.handleAfterAddUser()} show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header className="alert-primary bg-primary" >
-                        <Modal.Title>Add new User</Modal.Title>
+                        <Modal.Title> <p className="text-center" style={{color:'#EEEEEE', fontSize: 18}}>Add new User</p></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="modal-body">
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
-                                {<input type="text" className="form-control" value={this.state.name} id="name" name="name" onChange={this.handleChangeName} />}
+                                <input type="text" className="form-control" value={this.state.name} id="name" name="name" onChange={this.handleChangeName} />
+                            </div>
+                                <div className="form-group">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="text" className="form-control" value={this.state.email} id="email" name="email" onChange={this.handleChangeEmail} />
+                                </div>
+                            <div className="form-group">
+                                <label htmlFor="image-link">Password</label>
+                                <input type="text" className="form-control" value={this.state.password} name="password"
+                                           id="image-link" onChange={this.handleChangePassword} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="image-link">Image link</label>
-                                <input type="text" className="form-control" value={this.state.image_url} name="image_url"
-                                           id="image-link" onChange={this.handleChangeImage} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <input type="text" className="form-control" value={this.state.description} id="description"
-                                       name="description" onChange={this.handleChangeDescription}  />
+                                <label htmlFor="phone">Phone</label>
+                                <input type="text" className="form-control" value={this.state.phone} id="phone"
+                                       name="phone" onChange={this.handleChangePhone}  />
                             </div>
                         </div>
                 </Modal.Body>

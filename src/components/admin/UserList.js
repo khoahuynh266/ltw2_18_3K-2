@@ -1,17 +1,15 @@
-import React from "react";
+import React ,{Component} from "react";
 import Modal from 'react-modal';
-
-import { Link } from 'react-router-dom'
 import UserAdd from "./UserAdd";
+import { Link } from 'react-router-dom';
 
-class UserList extends React.Component {
+class UserList extends Component {
     constructor(props) {
         super(props);
         this.handleShowModalDelete = this.handleShowModalDelete.bind(this);
         this.handleCloseModalDelete = this.handleCloseModalDelete.bind(this);
-        this.handleAfterAdd = this.handleAfterAdd.bind(this);
-        this.Delete = this.Delete.bind(this);
-
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleAfterAddUser = this.handleAfterAddUser.bind(this);
         this.state = {
             showDeleteModal: false,
             deleteTarget: null,
@@ -34,8 +32,8 @@ class UserList extends React.Component {
             deleteTarget: name
         });
     }
-    handleAfterAdd(){
-        fetch("http://localhost:3001/users/")
+    handleAfterAddUser =(props)=> {
+        fetch("http://localhost:3001/api/users/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -48,38 +46,37 @@ class UserList extends React.Component {
                 // instead of a catch() block so that we don't swallow
                 // exceptions from actual bugs in components.
                 (error) => {
-                    alert("Loi!");
-                }
-            )
-    }
-
-    Delete = (key) => {
-        fetch("http://localhost:3001/user/:key",
-            {
-                method: 'delete',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(
-                (result) => {
-                    this.handleAfterAdd();
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
                     this.setState({
+                        isLoaded: true,
                         error
                     });
                 }
-            );
-
+            )
+    }
+    handleDelete(key) {
+        fetch("http://localhost:3001/api/users/"+key,
+            {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+            .then(
+                (result) => {
+                    this.setState({
+                        show: false,
+                    });
+                    this.handleAfterAddUser();
+                })
     }
 
+
     componentDidMount() {
-        fetch("http://localhost:3001/users")
+        fetch("http://localhost:3001/api/users/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -119,7 +116,7 @@ class UserList extends React.Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h2 ref={subtitle => this.subtitle = subtitle} className="modal-title" id="exampleModalLabel">Add new celebrity</h2>
+                                <h2 ref={subtitle => this.subtitle = subtitle} className="modal-title" id="exampleModalLabel">Add new User</h2>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
@@ -132,7 +129,6 @@ class UserList extends React.Component {
                         </div>
                     </div>
                 </Modal>
-
 
                         <table className="table table-sm">
                             <thead>
@@ -155,16 +151,13 @@ class UserList extends React.Component {
                                     <td>{item.type}</td>
                                     <td>{item.phone}</td>
                                     <td>
-                                        {/*
 
-                                             <Link to ="/admin/user" onClick={this.handlerDelete.bind(this,item.OrderID)}>
-                                            Remove
-                                             </Link>*/}
+
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group pdleft text-center">
-                                                <Link to ={"/admin/user/"+item.id} className="fas fa-edit btn btn-primary"></Link>
-                                                <button type="button"  onClick={this.handlerDelete.bind(this,item.id)} className="btn btn-danger"
-                                                >Delete
+                                                <Link to ={"/admin/listUser/"+ item.id} className="btn btn-primary">Chi tiết</Link>
+                                                <button type="button" className="btn btn-danger"  onClick={this.handleDelete.bind(this,item.id)}
+                                                >Xóa
                                                 </button>
                                             </div>
                                         </div>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Link ,Route} from 'react-router-dom';
-import Content from "./Content";
 export default class Header extends Component {
     render(){
         return (
