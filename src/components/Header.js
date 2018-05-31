@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import { Link ,Route} from 'react-router-dom';
-export default class Header extends Component {
+export default class Header extends Component{
+
+logout()
+{
+    window.localStorage.clear();
+    document.location.href = "http://localhost:3000/";
+}
     render(){
         return (
             <header className="main-header  " >
@@ -46,7 +52,7 @@ export default class Header extends Component {
                     </div>
                     <ul className="nav navbar-nav navbar-right">
                         <li><Link to="login"><span className="glyphicon glyphicon-user"></span> Login </Link></li>
-                        <li><Link to="sinup"><span className="glyphicon glyphicon-log-in"></span> Sign Up</Link></li>
+                        <li><a onClick={this.logout.bind(this)}><span className="glyphicon glyphicon-log-in"></span> Logout </a></li>
                     </ul>
                 </nav>
 

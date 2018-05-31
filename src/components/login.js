@@ -154,9 +154,9 @@ class Login extends React.Component {
                             Not a member?
                         </span>
 
-                                <a href="#" className="txt2 bo1">
+                          <Link to="/register" className="txt2 bo1">
                                     Sign up now
-                                </a>
+                          </Link>
                             </div>
                             <div className={this.state.isHidden} id="pdtop20">
                                 <div className="alert alert-danger" id="ThongBao" role="alert">
