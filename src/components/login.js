@@ -24,76 +24,56 @@ class Login extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: this.email.value,
-                    password: this.password.value,
+                    'email': this.email.value,
+                    'password': this.password.value,
                 })
             }
         )
-        .then((res)=>res.json())
-            .then((res1)=>{
-            if(res1.err)
-            {
-                this.setState({isHidden:"visible"});
-            }
-            else {
-                window.localStorage.setItem('token', res1.token);
-                token = window.localStorage.getItem('token');
-                this.sendToken(token);
-            }
-        });
-        fetch("http://localhost:3001/login/login",
-            {
-                method: 'post',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: this.email.value,
-                    password: this.password.value,
 
-                }),
-            }).then((res1)=>{
-            if(res1.err)
+            .then((res)=>{
+            if(res.err)
             {
                 this.setState({isHidden:"visible"});
             }
             else {
-                window.localStorage.setItem('token', res1.token);
-                token = window.localStorage.getItem('token');
-                this.sendToken(token);
+                window.localStorage.setItem('access_token', res.token);
+                token = window.localStorage.getItem('access_token');
+                this.sendToken();
             }
         });
     }
 
-
-
-    sendToken(token)
+    sendToken()
     {
-        var token = window.localStorage.getItem('token');
-        var url = "http://localhost:3001/login/secret";
-        fetch(url,{
+        var token = window.localStorage.getItem('access_token');
+
+        var bearer = `bearer ${token.toString()}`;
+        fetch("http://localhost:3001/login/secret",{
             async: true,
             method: "GET",
             headers: {
-                "Authorization": "bearer "+token.toString(),
-                "Cache-Control": "no-cache",
+                'authorization': bearer,
             },
-        }).then(res => res.json())
+        })
             .then(
-                (result) => {
+                (res) => {
                     this.setState({
-                        access: result
+                        access: res.id // nhận đc res từ /secret
+
                     });
-                    if(this.state.access != "0")
+
+                    window.localStorage.setItem('permission', res.permission);
+                    window.localStorage.setItem('uid', res.id);
+                    if(this.state.access !== null)
                     {
-                        document.location.href = "http://localhost:3000/admin";
+                        document.location.href = "http://localhost:3000/";
                     }
                 },
             );
 
 
     }
+
 
 
     render()

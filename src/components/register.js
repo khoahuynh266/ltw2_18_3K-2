@@ -123,7 +123,7 @@ class register extends React.Component {
                     <span className="login100-form-title p-b-53">
                        Đăng kí tài khoản
                     </span>
-                        <div className={this.state.isHidden} id="pdtop20">
+                        <div className={this.state.isHidden} id="p-t-20">
                             <div className="alert alert-success" id="ThongBao" role="alert">
                                 <strong>Đăng ký thành công!</strong>.
                             </div>
@@ -134,12 +134,12 @@ class register extends React.Component {
                         <input type="text"  ref={input=>this.fullname = input}   className="input100" id="Fullname" name="Fullname"/>
                     </div>
                     </div>
-                    <div className={this.state.ErrName} id="pdtop20">
+                    <div className={this.state.ErrName} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Họ tên phải hơn 10 kí tự !</strong>.
                         </div>
                     </div>
-                    <div className={this.state.ErrName1} id="pdtop20">
+                    <div className={this.state.ErrName1} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Họ tên không được để trống !</strong>.
                         </div>
@@ -153,12 +153,12 @@ class register extends React.Component {
                                placeholder="Enter email"/>
                     </div>
                     </div>
-                    <div className={this.state.ErrEmail} id="pdtop20">
+                    <div className={this.state.ErrEmail} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Email sai định dạng !</strong>
                         </div>
                     </div>
-                    <div className={this.state.ErrEmail1} id="pdtop20">
+                    <div className={this.state.ErrEmail1} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Email không được để trống !</strong>
                         </div>
@@ -173,12 +173,12 @@ class register extends React.Component {
                                placeholder="Mật khẩu phải hơn 5 kí tự"/>
                     </div>
                     </div>
-                    <div className={this.state.ErrPassword} id="pdtop20">
+                    <div className={this.state.ErrPassword} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Mật khẩu phải hơn 5 kí tự !</strong>
                         </div>
                     </div>
-                    <div className={this.state.ErrPassword1} id="pdtop20">
+                    <div className={this.state.ErrPassword1} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Mật khẩu không được để trống !</strong>
                         </div>
@@ -193,12 +193,12 @@ class register extends React.Component {
                                placeholder="Mật khẩu phải hơn 5 kí tự"/>
                     </div>
                     </div>
-                    <div className={this.state.ErrPassword} id="pdtop20">
+                    <div className={this.state.ErrPassword} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Mật khẩu của bạn phải hơn 5 kí tự !</strong>
                         </div>
                     </div>
-                    <div className={this.state.ErrPassword2} id="pdtop20">
+                    <div className={this.state.ErrPassword2} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Mật khẩu không trùng khớp !!</strong>
                         </div>
@@ -213,7 +213,7 @@ class register extends React.Component {
                                placeholder="Nhập số điện thoại của bạn"/>
                     </div>
                     </div>
-                    <div className={this.state.ErrSDT} id="pdtop20">
+                    <div className={this.state.ErrSDT} id="p-t-20">
                         <div className="alert alert-danger" id="ThongBao" role="alert">
                             <strong>Số điện thoại sai định dạng !</strong>
                         </div>
