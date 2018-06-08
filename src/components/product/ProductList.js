@@ -18,9 +18,19 @@ class ProductList extends React.Component {
             isLoaded: false,
             items: [],
             Collapse: false,
+            curItem: '',
+            UpdateItem:'',
         };
     }
+    handlerUpdateModal(item) {
+                    this.setState({UpdateItem:item});
+                 }
 
+
+
+    handlerDeleteModal(item) {
+                    this.setState({curItem:item});
+            }
     handleCloseModalDelete() {
         this.setState({
             showDeleteModal: !this.state.showDeleteModal
@@ -51,18 +61,32 @@ class ProductList extends React.Component {
                 }
             )
     }
-
-    Delete = (key) => {
-        fetch("http://localhost:3001/api/product/:key",
+    Update = (e) => {
+        e.preventDefault()
+        fetch("http://localhost:3001/api/Product",
             {
-                method: 'delete',
+                method: 'POST',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                    "tensp": this.ten,
+                    "loai": this.loai,
+                    "mota": this.mota,
+                    "gia":  this.gia,
+                    "id_nsx": this.nsx,
+                    "soluong":this.soluong,
+                    "xuatsu": this.xuatsu,
+                    "image_url": this.image_url
+
+                }),
             })
             .then(
                 (result) => {
+                    this.setState({
+                        show: false,
+                    });
                     this.handleAfterAdd();
                 },
                 // Note: it's important to handle errors here
@@ -75,6 +99,25 @@ class ProductList extends React.Component {
                 }
             );
 
+    }
+
+    Delete = (key) => {
+        fetch("http://localhost:3001/api/products/" + key,
+            {
+
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(
+                (result) => {
+                    this.setState({
+                        show: false,
+                    });
+                    this.handleAfterAdd();
+                })
     }
 
     componentDidMount() {
@@ -100,7 +143,7 @@ class ProductList extends React.Component {
     }
 
     render() {
-        const {error, isLoaded, items} = this.state;
+        const {error, isLoaded,UpdateItem, items} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -108,7 +151,92 @@ class ProductList extends React.Component {
         } else {
             return (
                 <div>
-                <Modal
+                    <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-blue">
+                                   <h4 class="modal-title">Xác nhận xóa sản phẩm</h4>
+                                </div>
+                                <div class="modal-body ">
+                                   <p className="text-center fs-18">Bạn thật sự muốn xóa sản phẩm mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
+                                    </p>
+                                    <div className="card mb-4 box-shadow">
+                                        <img className="card-img-top"
+                                             src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                             alt="Card image cap" />
+                                        <div className="card-body ">
+
+                                            <p className="card-text fs-19 p-t-5">{this.state.curItem.tensp}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-danger"
+                                            data-dismiss="modal">Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="ModalUpdate">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content text-center" >
+                                <div class="modal-header bg-blue">
+                                    <h4 class="modal-title">Sửa sản phẩm</h4>
+                                </div>
+                                <div class="modal-body text-left" >
+                                    <div className="form-group">
+                                        <label htmlFor="Ten" className="bold">Tên sản phẩm</label>
+                                    <input ref={input => this.ten = input}  type="text" className="form-control" name="ten" placeholder={this.state.UpdateItem.tensp}/>
+                                    </div>
+                                <div className="form-group">
+                                    <label htmlFor="Loai" className="bold">Loại</label>
+                                    <input  ref={input => this.loai = input}   type="text" className="form-control" name="loai" placeholder={this.state.UpdateItem.loai}  />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Mota" className="bold">Xuất xứ</label>
+                                    <input type="text" ref={input => this.xuatsu = input}  className="form-control " name="mota" placeholder={this.state.UpdateItem.xuatsu} />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="xuatxu"  className="control-label bold">Mô tả </label>
+                                    <div className="col-sm-12">
+                                          <textarea rows="4" id="xuatxu" name="xuatxu" ref={input => this.mota = input} placeholder={this.state.UpdateItem.mota}
+                                    className="form-control"/>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Gia" className="bold">Giá sản phẩm</label>
+                                    <input  ref={input => this.gia = input}  type="text" className="form-control" name="gia" placeholder={this.state.UpdateItem.gia}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Soluong"className="bold">Số lượng</label>
+                                    <input ref={input => this.soluong = input}   type="text" className="form-control" name="soluong" placeholder={this.state.UpdateItem.soluong}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="Nsx"className="bold">Mã nhà sản xuất</label>
+                                    <input type="text" ref={input => this.nsx = input}   className="form-control" name="nsx" placeholder={this.state.UpdateItem.nsx}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="image_url"className="bold">Link hình sản phẩm</label>
+                                    <input ref={input => this.image_url = input}  type="text" className="form-control" name="image_url" placeholder={this.state.UpdateItem.image   }/>
+                                </div>
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" onClick={this.Update.bind(this)} className="btn btn-success"
+                                            data-dismiss="modal">Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     contentLabel="Example Modal"
@@ -136,26 +264,19 @@ class ProductList extends React.Component {
                         {items.map(item => (
                             <div className="col-md-4" key={item.id}>
                                 <div className="card mb-4 box-shadow">
-
                                     <img className="card-img-top"
                                          src={item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                          alt="Card image cap" />
                                     <div className="card-body">
-                                        <p className="card-text">{item.tensp}</p>
-                                        <Collapse  in={this.state.open}>
-                                            <p className="card-text">{item.mota}</p></Collapse></div>
+                                        <h4 className="card-text p-t-10 p-b-10">{item.tensp}</h4>
+                                    </div>
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group">
-                                                <button  className="btn btn-sm btn-outline-secondary"
-                                                         onClick={() => this.setState({ open: !this.state.open })}>View
+                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerUpdateModal.bind(this,item)}
+                                                        className="btn info ">Edit
                                                 </button>
-                                                <button type="button"
-                                                        className="btn btn-sm btn-outline-secondary">Edit
-                                                </button>
-                                                <button id={item.key}
-                                                    type="button"
-                                                        className="btn btn-sm btn-outline-secondary"
-                                                        onClick={(id)=>{this.Delete}} >Delete
+                                                <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
+                                                >Delete
                                                 </button>
                                             </div>
                                         </div>

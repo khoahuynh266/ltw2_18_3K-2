@@ -63,7 +63,7 @@ class ProductAdd extends React.Component {
                     "id_nsx": this.nsx,
                     "soluong":this.soluong,
                     "xuatsu": this.xuatsu,
-                  // "image_url": this.state.image_url
+                  "image_url": this.image_url
 
                 }),
             })
@@ -89,7 +89,7 @@ class ProductAdd extends React.Component {
     render() {
         return (
             <div>  <button  className="btn btn-primary my-2" onClick={this.handleShow}>Thêm sản phẩm</button>
-                <div>
+                    <div>
 
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header className="alert-primary bg-primary" >
@@ -114,7 +114,7 @@ class ProductAdd extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="xuatxu"  className="control-label bold">Xuất xứ</label>
                                     <div className="col-sm-12">
-                                          <textarea rows="4" id="xuatxu" name="xuatxu" ref={input => this.des = input}
+                                          <textarea rows="4" id="xuatxu" name="xuatxu" ref={input => this.xuatsu = input}
                                                     className="form-control"/>
                                     </div>
                                 </div>

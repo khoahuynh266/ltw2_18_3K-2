@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Route, Redirect } from 'react-router'
 
 class Login extends React.Component {
     constructor(props) {
@@ -14,8 +13,6 @@ class Login extends React.Component {
 
     handlerSingin()
     {
-        var token;
-
         fetch("http://localhost:3001/login/login",
             {
                 method: "POST",
@@ -29,25 +26,24 @@ class Login extends React.Component {
                 })
             }
         )
-
+    .then((rs)=>rs.json())
             .then((res)=>{
-            if(res.err)
-            {
-                this.setState({isHidden:"visible"});
-            }
-            else {
-                window.localStorage.setItem('access_token', res.token);
-                token = window.localStorage.getItem('access_token');
-                this.sendToken();
-            }
-        });
+                if(res.err)
+                {
+                    this.setState({isHidden:"visible"});
+                }
+                else {
+                    window.localStorage.setItem('access_token', res.token);
+                  var  token = window.localStorage.getItem('access_token');
+                    this.sendToken(token);
+                }
+            });
     }
 
-    sendToken()
+    sendToken(token)
     {
-        var token = window.localStorage.getItem('access_token');
 
-        var bearer = `bearer ${token.toString()}`;
+        var bearer = 'bearer ' +token ;
         fetch("http://localhost:3001/login/secret",{
             async: true,
             method: "GET",
@@ -55,10 +51,11 @@ class Login extends React.Component {
                 'authorization': bearer,
             },
         })
+            .then((rs)=>rs.json())
             .then(
                 (res) => {
                     this.setState({
-                        access: res.id // nhận đc res từ /secret
+                        access: res.id
 
                     });
 
@@ -134,9 +131,9 @@ class Login extends React.Component {
                             Not a member?
                         </span>
 
-                          <Link to="/register" className="txt2 bo1">
+                                <Link to="/register" className="txt2 bo1">
                                     Sign up now
-                          </Link>
+                                </Link>
                             </div>
                             <div className={this.state.isHidden} id="pdtop20">
                                 <div className="alert alert-danger" id="ThongBao" role="alert">

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import { Modal } from 'react-bootstrap';
-import { Link ,Route} from 'react-router-dom';
 class UserAdd extends Component {
     constructor(props, context) {
         super(props, context);
@@ -101,9 +100,9 @@ class UserAdd extends Component {
                                     <input type="text" className="form-control" value={this.state.email} id="email" name="email" onChange={this.handleChangeEmail} />
                                 </div>
                             <div className="form-group">
-                                <label htmlFor="image-link">Password</label>
+                                <label htmlFor="password">Password</label>
                                 <input type="text" className="form-control" value={this.state.password} name="password"
-                                           id="image-link" onChange={this.handleChangePassword} />
+                                           id="password" onChange={this.handleChangePassword} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="phone">Phone</label>

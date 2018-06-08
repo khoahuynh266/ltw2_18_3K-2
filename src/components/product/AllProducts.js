@@ -15,9 +15,9 @@ export default class AllProducts extends Component {
                                 </div>
                                 <div className="box-body">
                                     <div className="row">
-                                        <p className="text-center">
+                                        <div className="text-center">
                                             <ProductList/>
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="box-footer">
