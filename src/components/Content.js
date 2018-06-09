@@ -5,6 +5,7 @@ import AllProducts from "./product/AllProducts";
 import AllUser from "./admin/AllUser";
 import login from "./login";
 import register from "./register";
+import productType from "./product/ProductType";
 export default class Content extends Component {
     render(){
         return (
@@ -12,6 +13,7 @@ export default class Content extends Component {
             <div className="content-wrapper">
                 <Switch>
                     <Route exact path = "/product" component={AllProducts}/>
+                    <Route exact path = "/productType" component={productType}/>
                     <Route exact path = "/user" component={AllUser}/>
                     <Route exact path = "/login" component={login}/>
                     <Route exact path = "/register" component={register}/>

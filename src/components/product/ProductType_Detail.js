@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import {Collapse} from 'react-bootstrap'
 import ProductAdd from "./ProductAdd";
 
-class ProductList extends React.Component {
+class ProductType_Detail extends React.Component {
     constructor(props) {
         super(props);
         this.handleShowModalDelete = this.handleShowModalDelete.bind(this);
@@ -44,7 +44,7 @@ class ProductList extends React.Component {
         });
     }
     handleAfterAdd(){
-        fetch("http://localhost:3001/api/products/")
+        fetch("http://localhost:3001/api/productType/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -63,7 +63,7 @@ class ProductList extends React.Component {
     }
     Update = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3001/api/Product",
+        fetch("http://localhost:3001/api/productType",
             {
                 method: 'POST',
                 headers: {
@@ -71,14 +71,12 @@ class ProductList extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "tensp": this.ten,
-                    "loai": this.loai,
-                    "mota": this.mota,
-                    "gia":  this.gia,
-                    "id_nsx": this.nsx,
-                    "soluong":this.soluong,
-                    "xuatsu": this.xuatsu,
-                    "image_url": this.image_url
+                    "id": this.id,
+                    "ten_nsx": this.ten_nsx,
+                    "diachi": this.diachi,
+                    "email": this.email,
+                    "phone":  this.phone,
+                    "image": this.image_url
 
                 }),
             })
@@ -102,7 +100,7 @@ class ProductList extends React.Component {
     }
 
     Delete = (key) => {
-        fetch("http://localhost:3001/api/products/" + key,
+        fetch("http://localhost:3001/api/productType/" + key,
             {
 
                 method: 'delete',
@@ -121,7 +119,7 @@ class ProductList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/api/products")
+        fetch("http://localhost:3001/api/productType")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -158,15 +156,15 @@ class ProductList extends React.Component {
                                    <h4 class="modal-title">Xác nhận xóa sản phẩm</h4>
                                 </div>
                                 <div class="modal-body ">
-                                   <p className="text-center fs-18">Bạn thật sự muốn xóa sản phẩm mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
+                                   <p className="text-center fs-18">Bạn thật sự muốn xóa nhãn hàng mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
                                     </p>
                                     <div className="card mb-4 box-shadow">
                                         <img className="card-img-top"
-                                             src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                             src={this.state.curItem.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                              alt="Card image cap" />
                                         <div className="card-body ">
 
-                                            <p className="card-text fs-19 p-t-5">{this.state.curItem.tensp}</p>
+                                            <p className="card-text fs-19 p-t-5">{this.state.curItem.ten_nsx}</p>
                                         </div>
                                     </div>
 
@@ -191,17 +189,14 @@ class ProductList extends React.Component {
                                 <div class="modal-body ">
                                     <div className="card mb-4 box-shadow">
                                         <img className="card-img-top"
-                                             src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                             src={this.state.curItem.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                              alt="Card image cap" />
-                                        <div className="card-body text-left">
+                                        <div className="card-body text-center">
                                         <ul>
-                                            <li><br/>Tên sản phẩm: <span className="card-text">{this.state.curItem.tensp}</span></li>
-                                            <li>Loại sản phẩm: <span className="card-text">{this.state.curItem.loai}</span></li>
-                                            <li>Giá sản phẩm :<span className="card-text">{this.state.curItem.gia}</span></li>
-                                            <li>Số lượng sản phẩm: <span className="card-text">{this.state.curItem.soluong}</span></li>
-                                            <li>Xuất sứ sản phẩm: <span className="card-text">{this.state.curItem.xuatsu}</span></li>
-                                            <li>Số lượng bán: <span className="card-textp">{this.state.curItem.daban}</span></li>
-                                            <li>Mô tả sản phẩm: <span className="card-textp">{this.state.curItem.mota}</span></li>
+                                            <li><br/>Tên nhãn hàng: <span className="card-text">{this.state.curItem.ten_nsx}</span></li>
+                                            <li>Địa chỉ: <span className="card-text">{this.state.curItem.diachi}</span></li>
+                                            <li>Email :<span className="card-text">{this.state.curItem.email}</span></li>
+                                            <li>Số điện thoại: <span className="card-text">{this.state.curItem.phone}</span></li>
                                         </ul>
                                         </div>
                                     </div>
@@ -210,7 +205,7 @@ class ProductList extends React.Component {
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-success"
-                                            data-dismiss="modal">Mua ngay
+                                            data-dismiss="modal">Product
                                     </button>
                                 </div>
                             </div>
@@ -301,18 +296,17 @@ class ProductList extends React.Component {
                             <div className="col-md-4" key={item.id}>
                                 <div className="card mb-4 box-shadow">
                                     <img className="card-img-top"
-                                         src={item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
-                                         alt="Card image cap" />
+                                         src={item.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                         alt="Card image cap"/>
                                     <div className="card-body">
-                                        <h4 className="card-text p-t-10 p-b-10">{item.tensp}</h4>
-                                        <h3 className="card-text p-t-10 p-b-10">{item.gia} VND</h3><br/>
+                                        <h4 className="card-text p-t-10 p-b-10">{item.ten_nsx}</h4>
                                     </div>
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group">
                                                 <button type="button" data-toggle="modal" data-target="#ModalDetail" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-info"
-                                                >Detail
+                                                >Introduce
                                                 </button>
-                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerUpdateModal.bind(this,item)}className="btn btn-primary">Edit
+                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerUpdateModal.bind(this,item)}className="btn btn-primary">Product
                                                 </button>
                                                 <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
                                                 >Delete
@@ -332,4 +326,4 @@ class ProductList extends React.Component {
     }
 }
 
-export default ProductList;
+export default ProductType_Detail;
