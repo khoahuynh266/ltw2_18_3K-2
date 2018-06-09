@@ -182,6 +182,42 @@ class ProductList extends React.Component {
                     </div>
 
 
+                    <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-blue">
+                                   <h4 class="modal-title">Thông Tin Sản Phẩm</h4>
+                                </div>
+                                <div class="modal-body ">
+                                    <div className="card mb-4 box-shadow">
+                                        <img className="card-img-top"
+                                             src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                             alt="Card image cap" />
+                                        <div className="card-body text-left">
+                                        <ul>
+                                            <li><br/>Tên sản phẩm: <span className="card-text">{this.state.curItem.tensp}</span></li>
+                                            <li>Loại sản phẩm: <span className="card-text">{this.state.curItem.loai}</span></li>
+                                            <li>Giá sản phẩm :<span className="card-text">{this.state.curItem.gia}</span></li>
+                                            <li>Số lượng sản phẩm: <span className="card-text">{this.state.curItem.soluong}</span></li>
+                                            <li>Xuất sứ sản phẩm: <span className="card-text">{this.state.curItem.xuatsu}</span></li>
+                                            <li>Số lượng bán: <span className="card-textp">{this.state.curItem.daban}</span></li>
+                                            <li>Mô tả sản phẩm: <span className="card-textp">{this.state.curItem.mota}</span></li>
+                                        </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-success"
+                                            data-dismiss="modal">Mua ngay
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="ModalUpdate">
                         <div class="modal-dialog " role="document">
                             <div class="modal-content text-center" >
@@ -269,15 +305,19 @@ class ProductList extends React.Component {
                                          alt="Card image cap" />
                                     <div className="card-body">
                                         <h4 className="card-text p-t-10 p-b-10">{item.tensp}</h4>
+                                        <h3 className="card-text p-t-10 p-b-10">{item.gia} VND</h3><br/>
                                     </div>
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group">
-                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerUpdateModal.bind(this,item)}
-                                                        className="btn info ">Edit
+                                                <button type="button" data-toggle="modal" data-target="#ModalDetail" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-info"
+                                                >Detail
+                                                </button>
+                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerUpdateModal.bind(this,item)}className="btn btn-primary">Edit
                                                 </button>
                                                 <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
                                                 >Delete
                                                 </button>
+                                                
                                             </div>
                                         </div>
                                 </div>
