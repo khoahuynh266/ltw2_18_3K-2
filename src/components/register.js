@@ -227,7 +227,7 @@ class register extends React.Component {
                         </button>
                     </div>
                         <br/>
-                        <p className="text-center" onClick={this.handleClick()}>Have an account ?
+                        <p className="text-center">Have an account ?
                             <Link to="/login" className=" m-b-20 ">
                             Login
                         </Link>
