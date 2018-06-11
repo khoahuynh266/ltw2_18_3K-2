@@ -71,9 +71,9 @@ export default class Sidebar extends Component {
                     </ul>
                 </section>
             </aside>
-                <switch>
-                    <Route exact path = "/" component={Content}/>
-                </switch>
+             <Switch>
+                    <Route path="/" component={Content}/>
+                </Switch>
             </div>
         )}
 };

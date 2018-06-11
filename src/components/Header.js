@@ -26,19 +26,12 @@ logout()
                                     <span className="label label-success">4</span>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li className="header">You have 4 messages</li>
+                                    <li className="header">Giỏ hàng</li>
                                     <li>
                                         <ul className="menu">
                                             <li>
                                                 <a href="#">
-                                                    <div className="pull-left">
-                                                        <img src="img/user2-160x160.jpg" className="img-circle" alt="User Image" />
-                                                    </div>
-                                                    <h4>
-                                                        Support Team
-                                                        <small><i className="fa fa-clock-o"></i> 5 mins</small>
-                                                    </h4>
-                                                    <p>Why not buy a new awesome theme?</p>
+
                                                 </a>
                                             </li>
                                         </ul>

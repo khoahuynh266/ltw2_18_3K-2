@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 class UserList extends Component {
     constructor(props) {
         super(props);
-        this.handleShowModalDelete = this.handleShowModalDelete.bind(this);
-        this.handleCloseModalDelete = this.handleCloseModalDelete.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleAfterAddUser = this.handleAfterAddUser.bind(this);
         this.state = {
@@ -17,22 +15,14 @@ class UserList extends Component {
             isLoaded: false,
             items: [],
             Collapse: false,
+            curItem: '',
         };
     }
 
-    handleCloseModalDelete() {
-        this.setState({
-            showDeleteModal: !this.state.showDeleteModal
-        });
+    handlerDeleteModal(item) {
+        this.setState({curItem:item});
     }
-
-    handleShowModalDelete(name){
-        this.setState({
-            showDeleteModal: !this.state.showDeleteModal,
-            deleteTarget: name
-        });
-    }
-    handleAfterAddUser =(props)=> {
+    handleAfterAddUser =()=> {
         fetch("http://localhost:3001/api/users/")
             .then(res => res.json())
             .then(
@@ -110,7 +100,7 @@ class UserList extends Component {
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     contentLabel="Example Modal"
-
+                    handleAfterAddUser = {this.handleAfterAddUser}
                 >
 
                     <div className="modal-dialog" role="document">
@@ -120,11 +110,9 @@ class UserList extends Component {
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
-                            <UserAdd/>
-
+                                <UserAdd handleAfterAddUser = {this.handleAfterAddUser} />
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onClose}>close</button>
-
                             </div>
                         </div>
                     </div>
@@ -156,8 +144,8 @@ class UserList extends Component {
                                         <div className="d-flex justify-content-between align-items-center">
                                             <div className="btn-group pdleft text-center">
                                                 <Link to ={"/admin/listUser/"+ item.id} className="btn btn-primary">Chi tiết</Link>
-                                                <button type="button" className="btn btn-danger"  onClick={this.handleDelete.bind(this,item.id)}
-                                                >Xóa
+                                                <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
+                                                >Delete
                                                 </button>
                                             </div>
                                         </div>
@@ -169,6 +157,31 @@ class UserList extends Component {
                             </div>
                             </tbody>
                         </table>
+
+                    <div className="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div className="modal-dialog " role="document">
+                            <div className="modal-content">
+                                <div className="modal-header bg-blue">
+                                    <h4 className="modal-title">Xác nhận xóa sản phẩm</h4>
+                                </div>
+                                <div className="modal-body text-center fs-18">
+                                    <p className="text-center fs-18">Bạn thật sự muốn xóa user "
+                                        <span className="text-red bg-blue-active fs-20" >{this.state.curItem.id}
+                                        </span>
+                                        <span>" Email: {this.state.curItem.email} </span>
+                                        không ?
+
+                                    </p>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" onClick={this.handleDelete.bind(this,this.state.curItem.id)} className="btn btn-danger"
+                                            data-dismiss="modal">Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
 
             );

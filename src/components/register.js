@@ -164,8 +164,6 @@ class register extends React.Component {
                         </div>
                     </div>
 
-
-
                     <div className="form-group">
                         <label htmlFor="Password">Password</label>
                         <div className="wrap-input100 validate-input" data-validate = "Password is required">

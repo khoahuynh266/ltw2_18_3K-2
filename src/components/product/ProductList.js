@@ -1,6 +1,5 @@
 import React from "react";
 import Modal from 'react-modal';
-import {Collapse} from 'react-bootstrap'
 import ProductAdd from "./ProductAdd";
 
 class ProductList extends React.Component {
@@ -25,8 +24,6 @@ class ProductList extends React.Component {
     handlerUpdateModal(item) {
                     this.setState({UpdateItem:item});
                  }
-
-
 
     handlerDeleteModal(item) {
                     this.setState({curItem:item});
@@ -169,7 +166,6 @@ class ProductList extends React.Component {
                                             <p className="card-text fs-19 p-t-5">{this.state.curItem.tensp}</p>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

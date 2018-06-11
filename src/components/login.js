@@ -78,23 +78,23 @@ class Login extends React.Component {
         return (
             <div className="limiter">
                 <div className="container-login100" style={{backgroundImage: "URL('http://backgroundcheckall.com/wp-content/uploads/2017/12/login-page-background-images-hd-9.jpg')"}}>
-                    <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-                        <form className="login100-form validate-form flex-sb flex-w">
+                     <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                <form className="login100-form validate-form flex-sb flex-w">
                     <span className="login100-form-title p-b-53">
                         Sign In With
                     </span>
 
-                            <a href="#" className="btn-face m-b-20">
-                                <i className="fa fa-facebook-official"></i>
-                                Facebook
-                            </a>
+                    <a href="#" className="btn-face m-b-20">
+                        <i className="fa fa-facebook-official"></i>
+                        Facebook
+                    </a>
 
-                            <a href="#" className="btn-google m-b-20">
-                                <img src="images/icons/icon-google.png" alt="GOOGLE"/>
-                                Google
-                            </a>
-
-                            <div className="p-t-31 p-b-9">
+                    <a href="#" className="btn-google m-b-20">
+                        <img src="images/icons/icon-google.png" alt="GOOGLE"/>
+                        Google
+                    </a>
+                    
+                    <div className="p-t-31 p-b-9">
                         <span className="txt1">
                             Email
                         </span>
@@ -105,7 +105,7 @@ class Login extends React.Component {
                                 <span className="focus-input100"></span>
                             </div>
 
-                            <div className="p-t-13 p-b-9">
+                          <div className="p-t-13 p-b-9">
                         <span className="txt1">
                             Password
                         </span>
