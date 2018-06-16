@@ -98,7 +98,7 @@ export default class Home extends Component {
                 <div className="row">
                     <div className="box">
                         <div className="box-header with-border">
-                            <h3 className="box-title fs-18">10 sản phẩm mới nhất</h3>
+                            <a className="box-title">10 sản phẩm mới nhất</a>
                            <button className="btn btn-primary navbar-right" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
                            Thu gọn
                            </button>
@@ -162,8 +162,8 @@ export default class Home extends Component {
                     </div>
                     <div className="box">
                         <div className="box-header with-border ">
-                            <h3 className="box-title fs-18">10 sản phẩm xem nhiều</h3>
-                            <button className="btn btn-primary navbar-right" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="true" aria-controls="collapseExample2">
+                            <a className="box-title">10 sản phẩm xem nhiều</a>
+                            <button className="btn btn-primary navbar-right" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
                                 Thu gọn
                             </button>
                         </div>
@@ -178,7 +178,7 @@ export default class Home extends Component {
                                                     <div className="col-md-4" key={item.id}>
                                                         <div className="card mb-4 box-shadow">
                                                             <Link to ={'/productdetal/'+item.id}>
-                                                                <img  className="card-img-top"
+                                                                <img width="300" height="300" className="card-img-top"
                                                                       src={item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                                                       alt={item.tensp}
                                                                 />
@@ -226,8 +226,8 @@ export default class Home extends Component {
                     </div>
                     <div className="box">
                         <div className="box-header with-border">
-                            <h3 className="box-title fs-18">10 sản phẩm bán chạy</h3>
-                            <button className="btn btn-primary navbar-right" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="true" aria-controls="collapseExample3">
+                            <a className="box-title">10 sản phẩm bán chạy</a>
+                            <button className="btn btn-primary navbar-right" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
                                 Thu gọn
                             </button>
                         </div>

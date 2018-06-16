@@ -1,23 +1,66 @@
 import React, {Component} from 'react';
-import { Link ,Route} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 
-export default class Header extends Component{
+class Header extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogin : false,
+            QueryStr : "",
 
-logout()
-{
-    window.localStorage.clear();
-    document.location.href = "http://localhost:3000/";
-}
+        }
+        this.handleQueryString = this.handleQueryString.bind(this)
+        this.Search = this.Search.bind(this);
+    }
+
+    handleQueryString = (e) => {
+        this.setState({
+            QueryStr: e.target.value
+        })
+    }
+
+    Search() {
+        if (this.QueryStr.value === "" || this.QueryStr.value == null) {
+            this.QueryStr.value = "null";
+        }
+        else {
+            // var  url = "/search/"+this.QueryStr.value;
+            // this.props.history.replace(url);
+             document.location.href = "http://localhost:3000/search/" + this.QueryStr.value;
+        }
+    }
+    logout()
+    {
+        window.localStorage.clear();
+        this.props.history.push("/");
+    }
     render(){
         return (
             <header className="main-header">
                 <Link to="/" className="logo">
                     <span className="logo-lg" ><b>2K Shop</b></span>
+                    <span className="logo-mini" ><b>2K Shop</b></span>
                 </Link>
                 <nav className="navbar navbar-static-top">
                     <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">
                         <span className="sr-only">Toggle navigation</span>
                     </a>
+                    <div className="navbar-nav p-t-10 col-sm-8">
+                        <div className="px-2 col-md-10">
+                            <input ref={input=>this.QueryStr = input} className="form-control wrap-input100 col-md-8" type="text" placeholder="Nhập tên sản phẩm , giá sản phẩm , nhà sản xuất,..."
+                               // aria-label="Search"
+                            />
+
+                        </div>
+                            <div className="px-2 col-md-2">
+                                {/*<Link to={'/products/search/'+this.state.QueryStr} className="nav-link" >*/}
+                                <button className="btn btn-primary" onClick={this.Search}>
+                                    <i className="fa fa-search"></i>
+                                    Tìm kiếm
+                                </button>
+                                {/*</Link>*/}
+                            </div>
+                            </div>
                     <div className="navbar-custom-menu">
                         <ul className="nav navbar-nav">
                             <li className="dropdown messages-menu">
@@ -49,4 +92,4 @@ logout()
             </header>
         )
     }
-}
+}export  default withRouter(Header);

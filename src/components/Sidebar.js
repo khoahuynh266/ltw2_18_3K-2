@@ -1,10 +1,15 @@
 // noinspection JSAnnotator
 import React, {Component} from 'react';
-import { Link ,Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link ,Switch} from 'react-router-dom';
 import Content from "./Content";
 import login from "./login";
 
 export default class Sidebar extends Component {
+    constructor(props) {
+        super(props)}
+
+
+
     render(){
         return (
             <div>
@@ -19,15 +24,6 @@ export default class Sidebar extends Component {
                             <Link to="/#" className="fa fa-circle text-success" /> Online
                         </div>
                     </div>
-                    <form action="" method="get" className="sidebar-form">
-                        <div className="input-group">
-                        <input type="text" name="q" className="form-control" placeholder="Search..." />
-                        <span className="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" className="btn btn-flat"><i className="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
                     <ul className="sidebar-menu" data-widget="tree">
                         <li className="header">MAIN NAVIGATION</li>
 

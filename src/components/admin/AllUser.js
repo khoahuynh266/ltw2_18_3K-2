@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import Error from "../error"
 import UserList from "./UserList";
 import UserAdd from "./UserAdd"
@@ -16,7 +16,7 @@ class AllUser extends React.Component {
 
     Logout() {
         window.localStorage.removeItem("access_token"); // remove token là access token
-        document.location.href = "http://localhost:3000/"; // chuyển về trang index
+        this.props.history.push("/"); // chuyển về trang index
     }
 
     render() {
@@ -63,5 +63,5 @@ class AllUser extends React.Component {
     }
 }
 
-export default AllUser
+export default withRouter(AllUser);
 

@@ -148,17 +148,18 @@ class ProductList extends React.Component {
         } else {
             return (
                 <div>
-                    <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog " role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-blue">
-                                   <h4 class="modal-title">Xác nhận xóa sản phẩm</h4>
+                    <div className="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div className="modal-dialog " role="document">
+                            <div className="modal-content">
+                                <div className="modal-header bg-blue">
+                                   <h4 className="modal-title">Xác nhận xóa sản phẩm</h4>
                                 </div>
-                                <div class="modal-body ">
+                                <div className="modal-body ">
                                    <p className="text-center fs-18">Bạn thật sự muốn xóa sản phẩm mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
                                     </p>
                                     <div className="card mb-4 box-shadow">
-                                        <img className="card-img-top"
+                                        <img width="300"
+                                             height="300"  className="card-img-top"
                                              src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                              alt="Card image cap" />
                                         <div className="card-body ">
@@ -167,8 +168,8 @@ class ProductList extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-danger"
                                             data-dismiss="modal">Delete
                                     </button>
@@ -178,13 +179,13 @@ class ProductList extends React.Component {
                     </div>
 
 
-                    <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog " role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-blue">
-                                   <h4 class="modal-title">Thông Tin Sản Phẩm</h4>
+                    <div className="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div className="modal-dialog " role="document">
+                            <div className="modal-content">
+                                <div className="modal-header bg-blue">
+                                   <h4 className="modal-title">Thông Tin Sản Phẩm</h4>
                                 </div>
-                                <div class="modal-body ">
+                                <div className="modal-body ">
                                     <div className="card mb-4 box-shadow">
                                         <img className="card-img-top"
                                              src={this.state.curItem.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
@@ -203,8 +204,8 @@ class ProductList extends React.Component {
                                     </div>
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-success"
                                             data-dismiss="modal">Mua ngay
                                     </button>
@@ -214,13 +215,13 @@ class ProductList extends React.Component {
                     </div>
 
 
-                    <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="ModalUpdate">
-                        <div class="modal-dialog " role="document">
-                            <div class="modal-content text-center" >
-                                <div class="modal-header bg-blue">
-                                    <h4 class="modal-title">Sửa sản phẩm</h4>
+                    <div className="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="ModalUpdate">
+                        <div className="modal-dialog " role="document">
+                            <div className="modal-content text-center" >
+                                <div className="modal-header bg-blue">
+                                    <h4 className="modal-title">Sửa sản phẩm</h4>
                                 </div>
-                                <div class="modal-body text-left" >
+                                <div className="modal-body text-left" >
                                     <div className="form-group">
                                         <label htmlFor="Ten" className="bold">Tên sản phẩm</label>
                                     <input ref={input => this.ten = input}  type="text" className="form-control" name="ten" placeholder={this.state.UpdateItem.tensp}/>
@@ -258,8 +259,8 @@ class ProductList extends React.Component {
                                     <input ref={input => this.image_url = input}  type="text" className="form-control" name="image_url" placeholder={this.state.UpdateItem.image   }/>
                                 </div>
                             </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="button" onClick={this.Update.bind(this)} className="btn btn-success"
                                             data-dismiss="modal">Save
                                     </button>
@@ -296,7 +297,7 @@ class ProductList extends React.Component {
                         {items.map(item => (
                             <div className="col-md-4" key={item.id}>
                                 <div className="card mb-4 box-shadow">
-                                    <img className="card-img-top"
+                                      <img width="300" height="300" className="card-img-top"
                                          src={item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                          alt="Card image cap" />
                                     <div className="card-body">
@@ -321,6 +322,7 @@ class ProductList extends React.Component {
                         ))
                         }
                     </div>
+                    <a id="back-to-top" href="#" className="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span className="glyphicon glyphicon-chevron-up"></span></a>
                 </div>
                 </div>
             );
