@@ -10,6 +10,8 @@ import productType_List from "./product/ProductType_List";
 import BestSeller from "./product/bestseller";
 import home from "./home";
 import search from "./product/search";
+import ProductPagination from "./product/Products_Pagination";
+import er from "./error";
 export default class Content extends Component {
     constructor(props) {
         super(props)
@@ -29,6 +31,8 @@ export default class Content extends Component {
                     <Route exact path = "/login" component={login}/>
                     <Route exact path = "/register" component={register}/>
                     <Route exact path = "/" component={home}/>
+                    <Route path = "/products/page/:number" component={ProductPagination}/>
+                    <Route component={er}/>
                 </Switch>
             </div>
         )

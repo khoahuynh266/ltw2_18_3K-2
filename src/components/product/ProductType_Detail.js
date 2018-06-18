@@ -27,7 +27,7 @@ class ProductType_Detail extends React.Component {
     }
     handlerUpdateModal(item) {
                     this.setState({UpdateItem:item});
-                 }
+    }
 
 
 

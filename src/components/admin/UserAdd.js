@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { Modal } from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 class UserAdd extends Component {
     constructor(props, context) {
         super(props, context);
@@ -20,14 +21,24 @@ class UserAdd extends Component {
         this.handleShow = this.handleShow.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChangeFlag = this.handleChangeFlag.bind(this)
     }
-    handleChangeEmail = (e) => {
+    handleChangeFlag () {
         this.setState({
-            email: e.target.value
-        })
+            ErrPassword: "hidden",
+            ErrName: "hidden",
+            ErrSDT: "hidden",
+            ErrEmail: "hidden",
+            ErrPassword1: "hidden",
+            ErrPassword2: "hidden",
+            ErrName1: "hidden",
+            ErrSDT1: "hidden",
+            ErrEmail1: "hidden",
+        });
     }
     handleClose() {
         this.setState({ show: false });
+        this.handleChangeFlag();
     }
 
     handleShow() {
@@ -79,17 +90,7 @@ class UserAdd extends Component {
 
 
         if (flag) {
-            this.setState({
-                ErrPassword: "hidden",
-                ErrName: "hidden",
-                ErrSDT: "hidden",
-                ErrEmail: "hidden",
-                ErrPassword1: "hidden",
-                ErrPassword2: "hidden",
-                ErrName1: "hidden",
-                ErrSDT1: "hidden",
-                ErrEmail1: "hidden",
-            });
+            this.handleChangeFlag();
 
             fetch("http://localhost:3001/api/users",
                 {
@@ -108,11 +109,12 @@ class UserAdd extends Component {
                     })
                 }).then(console.log("Thêm khoản thành công!"));
             this.setState({isHidden: 'visible'});
-           this.handleClose();
+
+
         }
-
         this.phone.value = this.password.value = this.fullname.value = this.email.value = null;
-
+        document.location.href = "http://localhost:3000/user";
+        this.handleClose();
     }
 
     render() {
@@ -213,4 +215,4 @@ class UserAdd extends Component {
 
 }
 
-export default UserAdd;
+export default withRouter(UserAdd);
