@@ -5,8 +5,8 @@ import AllProducts from "./product/AllProducts";
 import AllUser from "./admin/AllUser";
 import login from "./login";
 import register from "./register";
-import productType from "./product/ProductType";
-import productType_List from "./product/ProductType_List";
+import ProducerList from "./product/ProducerList";
+import ProductsByProducer from "./product/ProductsByProducer";
 import BestSeller from "./product/bestseller";
 import home from "./home";
 import search from "./product/search";
@@ -25,8 +25,8 @@ export default class Content extends Component {
                     <Route exact path = "/home" component={home}/>
                     <Route exact path = "/bestseller" component={BestSeller}/>
                     <Route exact path = "/product" component={AllProducts}/>
-                    <Route exact path = "/productType" component={productType}/>
-                    <Route exact path = "/productType_List" component={productType_List}/>
+                    <Route exact path = "/producer" component={ProducerList}/>
+                    <Route path = "/products/producer/:number" component={ProductsByProducer}/>
                     <Route exact path = "/user" component={AllUser}/>
                     <Route exact path = "/login" component={login}/>
                     <Route exact path = "/register" component={register}/>

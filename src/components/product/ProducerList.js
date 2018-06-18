@@ -1,12 +1,10 @@
 import React from "react";
 import Modal from 'react-modal';
-import {Collapse} from 'react-bootstrap'
 import ProductAdd from "./ProductAdd";
 import {Link ,Route, Switch} from 'react-router-dom';
-import ProductType_List from "./ProductType_List";
 
 
-class ProductType_Detail extends React.Component {
+class ProducerList extends React.Component {
     constructor(props) {
         super(props);
         this.handleShowModalDelete = this.handleShowModalDelete.bind(this);
@@ -29,8 +27,6 @@ class ProductType_Detail extends React.Component {
                     this.setState({UpdateItem:item});
     }
 
-
-
     handlerDeleteModal(item) {
                     this.setState({curItem:item});
             }
@@ -47,7 +43,7 @@ class ProductType_Detail extends React.Component {
         });
     }
     handleAfterAdd(){
-        fetch("http://localhost:3001/api/productType/")
+        fetch("http://localhost:3001/api/Producer/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -66,7 +62,7 @@ class ProductType_Detail extends React.Component {
     }
     Update = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3001/api/productType",
+        fetch("http://localhost:3001/api/Producer",
             {
                 method: 'POST',
                 headers: {
@@ -103,7 +99,7 @@ class ProductType_Detail extends React.Component {
     }
 
     Delete = (key) => {
-        fetch("http://localhost:3001/api/productType/" + key,
+        fetch("http://localhost:3001/api/Producer/" + key,
             {
 
                 method: 'delete',
@@ -122,7 +118,7 @@ class ProductType_Detail extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/api/productType")
+        fetch("http://localhost:3001/api/Producer")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -151,7 +147,7 @@ class ProductType_Detail extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <div>
+                <React.Fragment>
                     <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog " role="document">
                             <div class="modal-content">
@@ -207,7 +203,7 @@ class ProductType_Detail extends React.Component {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <Link to="/ProductType_List"><button type="button" className="btn btn-primary">Product</button></Link>
+                                    <Link to="/Producer_List"><button type="button" className="btn btn-primary">Product</button></Link>
                                 </div>
                             </div>
                         </div>
@@ -291,38 +287,65 @@ class ProductType_Detail extends React.Component {
                     </div>
                 </Modal>
 
-                <div className="row">
-                    <div className="col-md-auto">
-                        {items.map(item => (
-                            <div className="col-md-4" key={item.id}>
-                                <div className="card mb-4 box-shadow">
-                                    <img className="card-img-top"
-                                         src={item.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
-                                         alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <h4 className="card-text p-t-10 p-b-10">{item.ten_nsx}</h4>
-                                    </div>
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <div className="btn-group">
-                                                <button type="button" data-toggle="modal" data-target="#ModalDetail" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-info"
-                                                >Introduce
-                                                </button>       
-                                                <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
-                                                >Delete
-                                                </button>
-                                                <Link to="/ProductType_List"><button type="button" className="btn btn-primary">Product</button></Link>
-                                            </div>   
+
+                {/*xuất danh sách các hãng*/}
+                <section className="content-header">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="box">
+                                <div className="box-header with-border">
+                                    <h3 className="box-title">Danh sách các hãng</h3>
+                                </div>
+                                    <div className="box-body">
+                                        <div className="row">
+                                            <div className="text-center">
+                                                <div className="row">
+                                                    <div className="col-md-auto">
+                                                        {items.map(item => (
+                                                            <div className="col-md-4" key={item.id}>
+                                                                <div className="card mb-4 box-shadow">
+                                                                    <img className="card-img-top"
+                                                                         src={item.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
+                                                                         alt="Card image cap"/>
+                                                                    <div className="card-body">
+                                                                        <h4 className="card-text p-t-10 p-b-10">{item.ten_nsx}</h4>
+                                                                    </div>
+                                                                    <div className="d-flex justify-content-between align-items-center">
+                                                                        <div className="btn-group">
+                                                                            <button type="button" data-toggle="modal" data-target="#ModalDetail" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-info"
+                                                                            >Introduce
+                                                                            </button>
+                                                                            <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
+                                                                            >Delete
+                                                                            </button>
+                                                                            <Link to="/Producer_List"><button type="button" className="btn btn-primary">Product</button></Link>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div className="box-footer">
+                                        <div className="row">
+                                            <div className="col-sm-3 col-xs-6">
+                                            </div>
+                                         </div>
+                                    </div>
                                 </div>
                             </div>
-                        ))
-                        }
-                    </div>
-                </div>
-                </div>
+                        </div>
+                </section>
+                </React.Fragment>
+
+
             );
         }
     }
 }
 
-export default ProductType_Detail;
+export default ProducerList;
