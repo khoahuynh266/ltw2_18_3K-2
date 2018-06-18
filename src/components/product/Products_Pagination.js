@@ -43,9 +43,8 @@ class ProductPagination extends React.Component {
     handlerClick(i) {
         this.props.history.replace("/products/page/"+i);
         curPage =i;
-
         this.render();
-      this.getItems(curPage);
+        this.getItems(curPage);
     }
 
     componentDidMount() {
@@ -138,18 +137,19 @@ class ProductPagination extends React.Component {
                                                                     <h4 className="card-text p-t-10 p-b-10">{item.tensp}</h4>
                                                                     <h3 className="card-text p-t-10 p-b-10">{item.gia} VND</h3><br/>
                                                                 </div>
-                                                                    </div>
-                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     ))
                                                     }
                                                 </div>
                                                 <a id="back-to-top"  className="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span className="glyphicon glyphicon-chevron-up"></span></a>
 
+                                            </div>
                                         </div>
-                                        </div>
-                                </div>
-                                <div className="box-footer">
-                                    <div className="row">
+                                    </div>
+                                    <div className="box-footer">
+                                        <div className="row">
                                             <div className="text-center ">
                                                 <nav aria-label="Page navigation">
                                                     <ul className="pagination">
