@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom'
-
+var QueryStr ='';
 class Search extends React.Component {
 
     constructor(props) {
@@ -12,38 +12,43 @@ class Search extends React.Component {
             isLoaded: false,
             items: [],
         }
-
+        this.getSerchItems=this.getSerchItems.bind(this);
     }
-
-    componentDidMount() {
-        var QueryStr =  this.props.match.params.QueryStr;
-        fetch("http://localhost:3001/api/products/search/"+QueryStr,{
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json',
+    getSerchItems(QueryStr)
+    {
+    fetch("http://localhost:3001/api/products/search/"+QueryStr,{
+        method: "get",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    items: result
+                });
             },
-        }).then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        items: result
-                    });
-                },
 
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                })
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            })
+}
+    componentWillReceiveProps() {
+        QueryStr =  this.props.match.params.QueryStr
+        this.getSerchItems(QueryStr)
 
     }
-
+    componentDidMount() {
+        QueryStr =  this.props.match.params.QueryStr
+        this.getSerchItems(QueryStr);
+    }
 
     render() {
         const {error, isLoaded,items} = this.state;
-
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -59,7 +64,7 @@ class Search extends React.Component {
                             <div className="box-header with-border">
                                 <div className="p-t-5 text-center  bg-light fs-18">
                                     <div>
-                                        <p>Từ khóa tìm kiếm:  <span className="bold fs-20">{ this.props.match.params.QueryStr}</span></p>
+                                        <p>Từ khóa tìm kiếm:  <span className="bold fs-20">{QueryStr}</span></p>
                                         <p>Có <span className="bold fs-20">{items.length}</span> kết quả tìm thấy </p>
                                     </div>
                                 </div>

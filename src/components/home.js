@@ -95,6 +95,41 @@ export default class Home extends Component {
         } else
         return (
             <section className="content-header">
+                <div className="container-fluid">
+                <div id="myCarousel" className="carousel slide" data-ride="carousel">
+                    {/*// <!-- Indicators -->*/}
+                    <ol className="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    {/*// <!-- Wrapper for slides -->*/}
+                    <div className="carousel-inner">
+                        <div className="item active">
+                            <img width="100%" height="192"src="http://3.bp.blogspot.com/-pIummBi6N3M/UeOYg7UCyKI/AAAAAAAAACk/vl5vyv3IuO0/s1600/dienthoaididong_02.jpg" alt="Los Angeles"/>
+                        </div>
+
+                        <div className="item">
+                            <img width="100%" height="192" src="https://cdn.tgdd.vn/Files/2014/04/07/541265/HotHungHuc_Banner.jpg" alt="Chicago"/>
+                        </div>
+
+                        <div className="item">
+                            <img width="100%" height="192" src="https://cdn.tgdd.vn/Files/2015/08/13/684283/tgdd-tragopoppo-800-300.jpg" alt="New York"/>
+                        </div>
+                    </div>
+
+                    {/*// <!-- Left and right controls -->*/}
+                    <a className="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                        <span className="sr-only">Previous</span>
+                    </a>
+                    <a className="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span className="glyphicon glyphicon-chevron-right"></span>
+                        <span className="sr-only">Next</span>
+                    </a>
+                </div>
+                </div>
                 <div className="row">
                     <div className="box">
                         <div className="box-header with-border">

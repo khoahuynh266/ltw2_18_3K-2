@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Link,withRouter} from 'react-router-dom';
-
+var qStr='';
 class Header extends Component{
     constructor(props) {
         super(props);
         this.state = {
             isLogin : false,
-            QueryStr : "",
-
+            isAmin:false,
+            UserName: '',
+            QueryStr : ""
         }
         this.handleQueryString = this.handleQueryString.bind(this)
         this.Search = this.Search.bind(this);
@@ -17,6 +18,7 @@ class Header extends Component{
         this.setState({
             QueryStr: e.target.value
         })
+        this.Search();
     }
 
     Search() {
@@ -24,9 +26,10 @@ class Header extends Component{
             this.QueryStr.value = "null";
         }
         else {
-            // var  url = "/search/"+this.QueryStr.value;
-            // this.props.history.replace(url);
-             document.location.href = "http://localhost:3000/search/" + this.QueryStr.value;
+            var  url = "/search/"+this.QueryStr.value;
+            this.props.history.push(url);
+            qStr = this.QueryStr.value;
+             // document.location.href = "http://localhost:3000/search/" + this.QueryStr.value;
         }
     }
     logout()
@@ -34,7 +37,18 @@ class Header extends Component{
         window.localStorage.clear();
         this.props.history.push("/");
     }
+
+    componentDidMount()
+    {
+        if(window.localStorage.getItem('username')) {
+            this.setState({Username: window.localStorage.getItem('username'), isLogin: true});
+        }
+        if(window.localStorage.getItem('permission')=== 1) {
+            this.setState({isAdmin: true , isLogin: true});
+        }
+    }
     render(){
+        const {isLogin,isAdmin,UserName} = this.state;
         return (
             <header className="main-header">
                 <Link to="/" className="logo">
@@ -48,17 +62,15 @@ class Header extends Component{
                     <div className="navbar-nav p-t-10 col-sm-8">
                         <div className="px-2 col-md-10">
                             <input ref={input=>this.QueryStr = input} className="form-control wrap-input100 col-md-8" type="text" placeholder="Nhập tên sản phẩm , giá sản phẩm , nhà sản xuất,..."
-                               // aria-label="Search"
+                                aria-label="Search"
                             />
 
                         </div>
                             <div className="px-2 col-md-2">
-                                {/*<Link to={'/products/search/'+this.state.QueryStr} className="nav-link" >*/}
                                 <button className="btn btn-primary" onClick={this.Search}>
                                     <i className="fa fa-search"></i>
                                     Tìm kiếm
                                 </button>
-                                {/*</Link>*/}
                             </div>
                             </div>
                     <div className="navbar-custom-menu">
@@ -84,9 +96,17 @@ class Header extends Component{
                         </ul>
 
                         <ul className="nav navbar-nav navbar-right">
-                            <li><Link to="login"><span className="glyphicon glyphicon-user"></span> Login </Link></li>
-                            <li><a onClick={this.logout.bind(this)}><span className="glyphicon glyphicon-log-in"></span> Logout </a></li>
-                        </ul>
+                            {isLogin === true?
+                                <li><Link to="login"><span className="glyphicon glyphicon-user"></span> Login </Link>
+                                </li>
+                                :
+                                <li><Link to="login"><span className="glyphicon glyphicon-user"></span>{UserName}
+                                </Link>
+                                </li>
+                            }
+                                <li><a onClick={this.logout.bind(this)}><span className="glyphicon glyphicon-log-in"></span> Logout </a></li>
+
+                                </ul>
                     </div>
                 </nav>
             </header>

@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link ,Switch} from 'react-router-dom';
 import Content from "./Content";
-import login from "./login";
 
 export default class Sidebar extends Component {
     constructor(props) {
@@ -26,50 +25,61 @@ export default class Sidebar extends Component {
                     </div>
                     <ul className="sidebar-menu" data-widget="tree">
                         <li className="header">MAIN NAVIGATION</li>
-
+                        <li>
+                            <Link to="/products/page/1">
+                                <i className="fa fa-pie-chart"></i>
+                                <span>Danh sách sản phẩm</span>
+                                <span className="pull-right-container">
+                            </span>
+                            </Link>
+                        </li>
                         <li className="treeview">
-                            <Link to="/">
+                            <Link to="/productType">
                             <i className="fa fa-files-o"></i>
-                            <span>Danh sách sản phẩm</span>
+                            <span>Loại sản phẩm</span>
                             <span className="pull-right-container">
+                                  <i className="fa fa-angle-left pull-right"></i>
                             </span>
                             </Link>
                             <ul className="treeview-menu">
-                                <li><Link to="/products/page/1"><i className="fa fa-circle-o"></i>Tất cả sản phẩm</Link>
+                                <li><Link to="/products/productType/1"><i className="fa fa-circle-o"></i>Điện thoại</Link>
                                 </li>
-                                <li><Link to="/producer"><i className="fa fa-circle-o"></i>Theo nhà sản xuất</Link>
+                                <li><Link to="/products/productType/2"><i className="fa fa-circle-o"></i>Máy tính bảng</Link>
                                 </li>
-                                <li><Link to="productType"><i className="fa fa-circle-o"></i>Theo loại</Link>
+                                <li><Link to="/products/productType/3"><i className="fa fa-circle-o"></i>Laptop</Link>
                                 </li>
                             </ul>
                         </li>
 
                         <li>
-                            <Link to="/ProductType">
+                            <Link to="/producer">
                             <i className="fa fa-pie-chart"></i>
-                            <span>Loại sản phẩm</span>
+                            <span>Nhà sản xuất</span>
                             <span className="pull-right-container">
-                            <i className="fa fa-angle-left pull-right"></i>
                             </span>
                         </Link>
-
                         </li>
-
+                        <li>
+                            <Link to="/listOder">
+                                <i className="fa fa-pie-chart"></i>
+                                <span>Danh sách đơn hàng</span>
+                                <span className="pull-right-container">
+                            </span>
+                            </Link>
+                        </li>
                         <li>
                         <Link to="/user">
                             <i className="fa fa-pie-chart"></i>
-                            <span>User</span>
+                            <span>Danh sách khách hàng</span>
                             <span className="pull-right-container">
-                            <i className="fa fa-angle-left pull-right"></i>
+
                             </span>
                         </Link>
                         </li>
                     </ul>
                 </section>
             </aside>
-             <Switch>
-                    <Route path="/" component={Content}/>
-                </Switch>
+             <Content/>
             </div>
         )}
 };

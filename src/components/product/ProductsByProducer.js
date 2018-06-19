@@ -82,11 +82,11 @@ this.getItems(producerID);
                                                                         </a>
                                                                     </div>
                                                                     <div className="d-flex justify-content-between align-items-center">
-                                                                        <Link to={'/ProductDetail/'+item.id}
+                                                                        <Link to={'/productDetail/'+item.id}
                                                                               className="btn btn-success text-center" role="button" name ="MuaNgay">
                                                                             Thêm vào giỏ hàng
                                                                         </Link>
-                                                                        <Link to={'/ProductDetail/'+item.id}
+                                                                        <Link to={'/productDetail/'+item.id}
                                                                               className="btn btn-danger text-center" role="button" name ="MuaNgay">
                                                                             Mua ngay
                                                                         </Link>

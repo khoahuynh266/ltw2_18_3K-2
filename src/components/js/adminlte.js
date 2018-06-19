@@ -1127,4 +1127,3 @@ throw new Error('AdminLTE requires jQuery')
   });
 
 }(jQuery);
-

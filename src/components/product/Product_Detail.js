@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import  banner from "../banner";
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -22,10 +21,16 @@ class ProductDetail extends React.Component {
         this.Get5ItemProduct_Producer = this.Get5ItemProduct_Producer.bind(this);
         this.Get5ItemProduct_Type = this.Get5ItemProduct_Type.bind(this);
         this.UpdateView = this.UpdateView.bind(this);
-
+        this.GetProductDetail = this.GetProductDetail.bind(this);
+        this.handlerClick = this.handlerClick.bind(this);
     }
 
 
+    handlerClick(i) {
+        this.props.history.push("/productDetail/"+i);
+        this.UpdateView(i);
+        this.GetProductDetail(i);
+    }
     Get5ItemProduct_Type() // lấy 5 sản phẩm cùng loại
     {
 
@@ -100,8 +105,8 @@ class ProductDetail extends React.Component {
     }
 
     //tăng lượt xem
-    UpdateView() {
-        var ID = this.props.match.params.number;
+    UpdateView(ID) {
+
         var url = "http://localhost:3001/api/products/UpdateView/" + ID;
         fetch(url, {
             mode: "cors",
@@ -112,11 +117,8 @@ class ProductDetail extends React.Component {
         })
 
     }
-
-    componentDidMount() {
-
-        this.UpdateView();
-        var ID = this.props.match.params.number;
+    GetProductDetail(ID)
+    {
         fetch("http://localhost:3001/api/products/" + ID, {
             mode: "cors",
             method: "GET",
@@ -145,6 +147,11 @@ class ProductDetail extends React.Component {
             );
     }
 
+    componentDidMount() {
+        var ID = this.props.match.params.number;
+        this.UpdateView(ID);
+        this.GetProductDetail(ID);
+    }
 
     render() {
         const {list, items_P, items_T} = this.state;
@@ -246,7 +253,7 @@ class ProductDetail extends React.Component {
                                     {items_T.map(item => (
                                         <div className="col-md-4" key={item.id}>
                                             <div className="card mb-4 box-shadow">
-                                                <Link to={'/ProductDetal/' + item.id}>
+                                                <Link to={'/productDetail/' + item.id}>
                                                     <img className="card-img-top"
                                                          src={"/"+item.image} onError={(e) => {
                                                         e.target.src = "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"
@@ -268,7 +275,7 @@ class ProductDetail extends React.Component {
                                                     </a>
                                                 </div>
                                                 <div className="d-flex justify-content-between align-items-center">
-                                                    <Link to={'/products/' + item.id}
+                                                    <Link to={'/productDetail/' + item.id}
                                                           className="btn btn-danger text-center" role="button"
                                                           name="MuaNgay">
                                                         Mua ngay
@@ -294,7 +301,7 @@ class ProductDetail extends React.Component {
                                     {items_P.map(item => (
                                         <div className="col-md-4" key={item.id}>
                                             <div className="card mb-4 box-shadow">
-                                                <Link to={'/products/' + item.id}>
+                                                <Link to={'/productDetail/' + item.id}>
                                                     <img className="card-img-top"
                                                          src={"/"+item.image} onError={(e) => {
                                                         e.target.src = "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"
@@ -316,7 +323,7 @@ class ProductDetail extends React.Component {
                                                     </a>
                                                 </div>
                                                 <div className="d-flex justify-content-between align-items-center">
-                                                    <Link to={'/products/' + item.id}
+                                                    <Link to={'/productDetail/' + item.id}
                                                           className="btn btn-danger text-center" role="button"
                                                           name="MuaNgay">
                                                         Mua ngay
