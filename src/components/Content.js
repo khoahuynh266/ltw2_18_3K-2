@@ -7,12 +7,13 @@ import login from "./Login";
 import register from "./register";
 import ProducerList from "./product/ProducerList";
 import ProductsByProducer from "./product/ProductsByProducer";
-import ProductsByProductType from "./product/ProductsByProductType";
 import BestSeller from "./product/bestseller";
 import home from "./home";
 import search from "./product/search";
 import ProductPagination from "./product/Products_Pagination";
 import ProductDetail from "./product/Product_Detail";
+import ProductCart from "./product/ProductCart";
+import ManageProduct from "./product/ManageProduct";
 import er from "./error";
 export default class Content extends Component {
     constructor(props) {
@@ -28,14 +29,14 @@ export default class Content extends Component {
                 <Route exact path = "/product" component={AllProducts}/>
                 <Route exact path = "/producer" component={ProducerList}/>
                 <Route exact path = "/products/producer/:number" component={ProductsByProducer}/>
-                <Route exact path = "/products/productType/:number" component={ProductsByProductType}/>
                 <Route exact path = "/user" component={AllUser}/>
                 <Route exact path = "/login" component={login}/>
                 <Route exact path = "/register" component={register}/>
                 <Route exact path = "/" component={home}/>
                 <Route exacr path = "/products/page/:number" component={ProductPagination}/>
                 <Route exacr path = "/productDetail/:number" component={ProductDetail}/>
-
+                <Route exacr path = "/ProductCart" component={ProductCart}/>
+                <Route exacr path = "/ManageProduct" component={ManageProduct}/>
                 <Route component={er}/>
             </Switch>
         </div>

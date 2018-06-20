@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import React, {Component} from 'react';
+import ProductCart from "./product/ProductCart"; 
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -168,7 +169,7 @@ export default class Home extends Component {
                                                                 </a>
                                                             </div>
                                                             <div className="d-flex justify-content-between align-items-center">
-                                                                <Link to={'/ProductDetail/'+item.id}
+                                                                <Link to={'/ProductCart/'+item.id}
                                                                       className="btn btn-success text-center" role="button" name ="MuaNgay">
                                                                     Thêm vào giỏ hàng
                                                                 </Link>
