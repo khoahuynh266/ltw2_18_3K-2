@@ -85,15 +85,30 @@ class Search extends React.Component {
                                                                         <img width="300" height="300" className="card-img-top"
                                                                              src={"/"+item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                                                                              alt="Card image cap" />
+                                                                        
                                                                         <div className="card-body">
                                                                             <h4 className="card-text p-t-10 p-b-10">{item.tensp}</h4>
-                                                                            <h3 className="card-text p-t-10 p-b-10">{item.gia} VND</h3><br/>
+                                                                            <h3 className="card-text p-t-10 p-b-10">{item.gia} VND</h3>
+                                                                            <a className="btn btn-default" role = "button">
+                                                                                <span className="label glyphicon glyphicon-eye-open" ></span>
+                                                                                Xem : {item.luotxem}
+                                                                            </a>
+                                                                            <a className="btn btn-default" role = "button">
+                                                                                <span className="label  glyphicon glyphicon-tags"></span>
+                                                                                Đã bán : {item.daban}
+                                                                            </a>
                                                                         </div>
                                                                         <div className="d-flex justify-content-between align-items-center">
-                                                                            <div className="btn-group">
-
-                                                                            </div>
+                                                                            <Link to={'/ProductDetail/'+item.id}
+                                                                                  className="btn btn-success text-center" role="button" name ="MuaNgay">
+                                                                                Thêm vào giỏ hàng
+                                                                            </Link>
+                                                                            <Link to={'/ProductDetail/'+item.id}
+                                                                                  className="btn btn-danger text-center" role="button" name ="MuaNgay">
+                                                                                Mua ngay
+                                                                            </Link>
                                                                         </div>
+                                                                            
                                                                     </div>
                                                                 </div>
                                                             ))
