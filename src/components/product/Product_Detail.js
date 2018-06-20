@@ -16,7 +16,8 @@ class ProductDetail extends React.Component {
             ErrBuy: "hidden",
             ErrBuy1: "hidden",
             ErrBuy2: "hidden",
-            SaveProduct: []
+            UserCart: [],
+            curItem: ''
         }
         this.Get5ItemProduct_Producer = this.Get5ItemProduct_Producer.bind(this);
         this.Get5ItemProduct_Type = this.Get5ItemProduct_Type.bind(this);
@@ -85,24 +86,52 @@ class ProductDetail extends React.Component {
             )
     }
 
-
-    HandlerBuy(id) {
-        if (window.localStorage.getItem("permission") === null) {
-            this.props.history.push("/register");
+    HandlerBuy(id)
+    {
+        if(window.localStorage.getItem("access_token") === null)
+        {
+            document.location.href="/home/register";
         }
-        if (!this.Quantity.value) {
-            this.setState({ErrBuy: "visible"});
+
+        if(!this.Quantity.value)
+        {
+            this.setState({ErrBuy : "visible"});
             return;
         }
-        if (isNaN(this.Quantity.value)) {
-            this.setState({ErrBuy: "visible"});
+        if(isNaN(this.Quantity.value))
+        {
+            this.setState({ErrBuy : "visible"});
         }
 
-        else if (this.Quantity.value > this.state.Quantity) {
-            this.setState({ErrBuy1: "visible"});
+        else if(this.Quantity.value > this.state.Quantity)
+        {
+            this.setState({ErrBuy1:"visible"});
         }
+        
+        else {
+            var UserCartTemp = [];
+            if(window.localStorage.getItem("UserCart")) {
+                UserCartTemp =  JSON.parse(window.localStorage.getItem("UserCart"));
+                console.log(UserCartTemp);
+            }
+            else
+            {
+                UserCartTemp = [];
+            }
+            console.log(this.Quantity.value);
+            UserCartTemp.push(this.state.list[0].id);
+            UserCartTemp.push(this.state.list[0].tensp);
+            UserCartTemp.push(this.state.list[0].gia);
+            UserCartTemp.push(this.Quantity.value);
+            window.localStorage.setItem("UserCart",JSON.stringify(UserCartTemp));
+            console.log(JSON.parse(window.localStorage.getItem("UserCart")).length);
+            this.setState({ErrBuy2 : "visible"});
+            this.Quantity.value = null;
+        }
+
 
     }
+
 
     //tăng lượt xem
     UpdateView(ID) {
@@ -158,20 +187,19 @@ class ProductDetail extends React.Component {
 
         return (
             <div className="content-header">
-            <div className="box">
+            <div className="box m-b-110">
                 <div className="box-header with-border">
                 </div>
+                {list.map(item => (
                 <div className="box-body">
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-8">
                         <div className="text-center">
-                            <div className="col-md-auto">
-                            {list.map(item => (
                     <div className="card mb-4 box-shadow text-center">
                         <img className="card-img-top"
                              src={"/"+item.image}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
                              alt="Card image cap" />
-                        <div className="card-body fs-16">
+                        <div className="card-body fs-14">
                            <h2 className="text-center text-blue">Thông tin sản phẩm</h2>
                                <li>Tên sản phẩm : <span className="bold"> {item.tensp}  </span></li>
                                <li>Giá : <span className="bold">{item.gia}</span></li>
@@ -192,6 +220,11 @@ class ProductDetail extends React.Component {
                                     <span className="glyphicon glyphicon-ok-circle"></span>
                                     Số lượng tồn : {item.soluong}
                                 </a>
+                        </div>
+                    </div>
+                        </div>
+                        </div>
+                            <div className="card col-md-3">
                             <div className="d-flex justify-content-between align-items-center p-b-70">
                                 <form className="form-inline">
                                     <div className="form-group">
@@ -210,36 +243,34 @@ class ProductDetail extends React.Component {
                                     </button>
                                 </form>
                             </div>
+                                <div className={this.state.ErrBuy} id="p-t-20">
+                                    <div className="alert alert-danger" id="ThongBao" role="alert">
+                                        <strong>Vui lòng chỉ nhập số ! , đặt mua thất bại !.</strong>.
+                                    </div>
+                                </div>
+
+                                <div className={this.state.ErrBuy1} id="p-t-20">
+                                    <div className="alert alert-danger" id="ThongBao" role="alert">
+                                        <strong>Số lượng nhập lớn hơn số lượng tồn , đặt mua thất bại !.</strong>
+                                    </div>
+                                </div>
+                                <div className={this.state.ErrBuy2} id="p-t-20">
+                                    <div className="alert alert-success" id="ThongBao" role="alert">
+                                        <strong>Đặt mua thành công , vui lòng kiểm tra
+                                            <Link to='/home/cart/'> giỏ hàng của bạn</Link>
+                                            !.</strong>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-
+                </div>
                 ))}
-                            <div className={this.state.ErrBuy} id="p-t-20">
-                                <div className="alert alert-danger" id="ThongBao" role="alert">
-                                    <strong>Vui lòng chỉ nhập số ! , đặt mua thất bại !.</strong>.
-                                </div>
-                            </div>
 
-                            <div className={this.state.ErrBuy1} id="p-t-20">
-                                <div className="alert alert-danger" id="ThongBao" role="alert">
-                                    <strong>Số lượng nhập lớn hơn số lượng tồn , đặt mua thất bại !.</strong>
-                                </div>
-                            </div>
-                            <div className={this.state.ErrBuy2} id="p-t-20">
-                                <div className="alert alert-success" id="ThongBao" role="alert">
-                                    <strong>Đặt mua thành công , vui lòng kiểm tra
-                                        <Link to='/home/cart/'> giỏ hàng của bạn</Link>
-                                        !.</strong>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="box-footer p-b-20">
+                <div className="box-footer p-b-50">
+
                 </div>
             </div>
-            </div>
+
 
                 <div className="box">
                     <div className="box-header bg-blue-active with-border">
@@ -333,7 +364,11 @@ class ProductDetail extends React.Component {
                                         </div>
                                     ))
                                     }
-                                </div>
+
+
+
+
+                                    </div>
                             </div>
                         </div>
                     </div>

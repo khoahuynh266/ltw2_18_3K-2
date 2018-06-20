@@ -35,20 +35,22 @@ class Header extends Component{
     logout()
     {
         window.localStorage.clear();
-        this.props.history.push("/");
+        document.location.href = "http://localhost:3000/";
+
+        //this.props.history.push("/");
     }
 
     componentDidMount()
     {
         if(window.localStorage.getItem('username')) {
-            this.setState({Username: window.localStorage.getItem('username'), isLogin: true});
+            this.setState({UserName: window.localStorage.getItem('username'), isLogin: true});
         }
         if(window.localStorage.getItem('permission')=== 1) {
             this.setState({isAdmin: true , isLogin: true});
         }
     }
     render(){
-        const {isLogin,isAdmin,UserName} = this.state;
+        const {isLogin,UserName} = this.state;
         return (
             <header className="main-header">
                 <Link to="/" className="logo">
@@ -97,10 +99,10 @@ class Header extends Component{
 
                         <ul className="nav navbar-nav navbar-right">
                             {isLogin === true?
-                                <li><Link to="login"><span className="glyphicon glyphicon-user"></span> Login </Link>
-                                </li>
+                                <li><Link to="/user/HistoryPurchase"><span className="glyphicon glyphicon-user"></span>{UserName}</Link></li>
                                 :
-                                <li><Link to="login"><span className="glyphicon glyphicon-user"></span>{UserName}
+                                <li><Link to="login"><span className="glyphicon glyphicon-user"></span>Login
+
                                 </Link>
                                 </li>
                             }

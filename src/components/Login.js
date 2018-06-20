@@ -60,6 +60,7 @@ class Login extends React.Component {
                     });
                     window.localStorage.setItem('permission', res.permission);
                     window.localStorage.setItem('uid', res.id);
+
                     window.localStorage.setItem('username', res.username);
                     if(this.state.access !== null)
                     {
