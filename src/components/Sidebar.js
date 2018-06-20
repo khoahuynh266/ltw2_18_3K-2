@@ -44,9 +44,9 @@ export default class Sidebar extends Component {
                             <ul className="treeview-menu">
                                 <li><Link to="/products/productType/1"><i className="fa fa-circle-o"></i>Điện thoại</Link>
                                 </li>
-                                <li><Link to="/products/productType/2"><i className="fa fa-circle-o"></i>Máy tính bảng</Link>
+                                <li><Link to="/products/productType/2"><i className="fa fa-circle-o"></i>Laptop</Link>
                                 </li>
-                                <li><Link to="/products/productType/3"><i className="fa fa-circle-o"></i>Laptop</Link>
+                                <li><Link to="/products/productType/3"><i className="fa fa-circle-o"></i>Máy tính bảng</Link>
                                 </li>
                             </ul>
                         </li>

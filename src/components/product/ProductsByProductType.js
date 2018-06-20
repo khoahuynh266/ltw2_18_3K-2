@@ -40,7 +40,7 @@ class ProductsByProductType extends React.Component {
             this.props.history.replace("/products/ProductType/"+1);
         }
         ProductTypeID = this.props.match.params.number;
-this.getItems(ProductTypeID);
+        this.getItems(ProductTypeID);
     }
 
     render() {
@@ -56,7 +56,7 @@ this.getItems(ProductTypeID);
                             <div className="col-md-12">
                                 <div className="box">
                                     <div className="box-header with-border">
-                                        <h3 className="box-title">Danh sách sản phẩm theo loaì</h3>
+                                        <h3 className="box-title">Danh sách sản phẩm theo loại</h3>
                                     </div>
                                     <div className="box-body">
                                         <div className="row">
