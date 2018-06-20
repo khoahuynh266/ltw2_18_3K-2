@@ -14,6 +14,7 @@ import ProductPagination from "./product/Products_Pagination";
 import ProductDetail from "./product/Product_Detail";
 import ProductCart from "./product/ProductCart";
 import ManageProduct from "./product/ManageProduct";
+import OderList from "./admin/OderList";
 import er from "./error";
 export default class Content extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ export default class Content extends Component {
                 <Route exacr path = "/products/page/:number" component={ProductPagination}/>
                 <Route exacr path = "/productDetail/:number" component={ProductDetail}/>
                 <Route exacr path = "/ProductCart" component={ProductCart}/>
+                <Route exacr path = "/OderList" component={OderList}/>
                 <Route exacr path = "/ManageProduct" component={ManageProduct}/>
                 <Route component={er}/>
             </Switch>

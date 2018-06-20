@@ -1,15 +1,14 @@
 import React from "react";
 import Modal from 'react-modal';
-import ProductAdd from "./ProductAdd";
 import {Link ,Route, Switch} from 'react-router-dom';
 
 
-class ProducerList extends React.Component {
+class ListOder_DS extends React.Component {
     constructor(props) {
         super(props);
         this.handleShowModalDelete = this.handleShowModalDelete.bind(this);
         this.handleCloseModalDelete = this.handleCloseModalDelete.bind(this);
-        this.handleAfterAdd = this.handleAfterAdd.bind(this);
+        this.reload = this.reload.bind(this);
         this.Delete = this.Delete.bind(this);
 
         this.state = {
@@ -42,8 +41,8 @@ class ProducerList extends React.Component {
             deleteTarget: name
         });
     }
-    handleAfterAdd(){
-        fetch("http://localhost:3001/api/Producer/")
+    reload(){
+        fetch("http://localhost:3001/api/OderList/")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -62,7 +61,7 @@ class ProducerList extends React.Component {
     }
     Update = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3001/api/Producer",
+        fetch("http://localhost:3001/api/OderList",
             {
                 method: 'POST',
                 headers: {
@@ -84,7 +83,7 @@ class ProducerList extends React.Component {
                     this.setState({
                         show: false,
                     });
-                    this.handleAfterAdd();
+                    this.reload();
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -99,7 +98,7 @@ class ProducerList extends React.Component {
     }
 
     Delete = (key) => {
-        fetch("http://localhost:3001/api/Producer/" + key,
+        fetch("http://localhost:3001/api/OderList/" + key,
             {
 
                 method: 'delete',
@@ -113,12 +112,12 @@ class ProducerList extends React.Component {
                     this.setState({
                         show: false,
                     });
-                    this.handleAfterAdd();
+                    this.reload();
                 })
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/api/Producer")
+        fetch("http://localhost:3001/api/OderList")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -147,67 +146,29 @@ class ProducerList extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <React.Fragment>
+                <div>
                     <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog " role="document">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-blue">
                                    <h4 class="modal-title">Xác nhận xóa sản phẩm</h4>
                                 </div>
-                                <div class="modal-body ">
-                                   <p className="text-center fs-18">Bạn thật sự muốn xóa nhãn hàng mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
+                                <div class="modal-body text-center">
+                                   <p className="text-center fs-18">Bạn thật sự muốn xóa sản phẩm mã : <span className="text-red bg-yellow" >{this.state.curItem.id}</span> không ?
                                     </p>
-                                    <div className="card mb-4 box-shadow">
-                                        <img className="card-img-top"
-                                             src={this.state.curItem.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
-                                             alt="Card image cap" />
-                                        <div className="card-body ">
-
-                                            <p className="card-text fs-19 p-t-5">{this.state.curItem.ten_nsx}</p>
-                                        </div>
-                                    </div>
-
                                 </div>
+                                <div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={this.Delete.bind(this,this.state.curItem)} className="btn btn-danger"
+                                    <button type="button" onClick={this.Delete.bind(this,this.state.curItem.id)} className="btn btn-danger"
                                             data-dismiss="modal">Delete
                                     </button>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog " role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-blue">
-                                   <h4 class="modal-title">Thông Tin Sản Phẩm</h4>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <div className="card mb-4 box-shadow">
-                                        <img className="card-img-top"
-                                             src={this.state.curItem.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
-                                             alt="Card image cap" />
-                                        <div className="card-body text-center">
-                                        <ul>
-                                            <li><br/>Tên nhãn hàng: <span className="card-text">{this.state.curItem.ten_nsx}</span></li>
-                                            <li>Địa chỉ: <span className="card-text">{this.state.curItem.diachi}</span></li>
-                                            <li>Email :<span className="card-text">{this.state.curItem.email}</span></li>
-                                            <li>Số điện thoại: <span className="card-text">{this.state.curItem.phone}</span></li>
-                                        </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <Link to="/Producer_List"><button type="button" className="btn btn-primary">Product</button></Link>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
 
 
                     <div class="modal fade" id="ModalUpdate" tabindex="-1" role="dialog" aria-labelledby="ModalUpdate">
@@ -277,7 +238,6 @@ class ProducerList extends React.Component {
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
-                            <ProductAdd/>
 
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.onClose}>close</button>
@@ -287,65 +247,43 @@ class ProducerList extends React.Component {
                     </div>
                 </Modal>
 
-
-                {/*xuất danh sách các hãng*/}
-                <section className="content-header">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="box">
-                                <div className="box-header with-border">
-                                    <h3 className="box-title">Danh sách các hãng</h3>
-                                </div>
-                                    <div className="box-body">
-                                        <div className="row">
-                                            <div className="text-center">
-                                                <div className="row">
-                                                    <div className="col-md-auto">
-                                                        {items.map(item => (
-                                                            <div className="col-md-4" key={item.id}>
-                                                                <div className="card mb-4 box-shadow">
-                                                                    <img className="card-img-top"
-                                                                         src={item.images}  onError={(e)=>{e.target.src= "http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg"}}
-                                                                         alt="Card image cap"/>
-                                                                    <div className="card-body">
-                                                                        <h4 className="card-text p-t-10 p-b-10">{item.ten_nsx}</h4>
-                                                                    </div>
-                                                                    <div className="d-flex justify-content-between align-items-center">
-                                                                        <div className="btn-group">
-                                                                            <button type="button" data-toggle="modal" data-target="#ModalDetail" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-info"
-                                                                            >Introduce
-                                                                            </button>
-                                                                            <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
-                                                                            >Delete
-                                                                            </button>
-                                                                            <Link to="/Producer_List"><button type="button" className="btn btn-primary">Product</button></Link>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        ))
-                                                        }
-                                                    </div>
-                                                </div>
+                <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th className="col-xs-6 col-md-4">ID người dùng</th>
+                                    <th>Số lượng sản phẩm</th>
+                                    <th>Tổng tiền đơn hàng</th>
+                                    <th>Trạng thái đơn hàng</th>
+                                </tr>
+                                </thead>
+                            <tbody>
+                            {items.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_nguoidung}</td>
+                                    <td>{item.tongsp}</td>
+                                    <td>{item.tongtien}</td>
+                                    <td>{item.trangthai}</td>
+                                    <td>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div className="btn btn-group">
+                                                <button type="button" data-toggle="modal" data-target="#ModalDelete" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-danger"
+                                                >Delete
+                                                </button>
+                                                <button type="button" data-toggle="modal" data-target="#ModalUpdate" onClick={this.handlerDeleteModal.bind(this,item)} className="btn btn-primary"
+                                                >Update
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="box-footer">
-                                        <div className="row">
-                                            <div className="col-sm-3 col-xs-6">
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            <div>
+
                             </div>
+                            </tbody>
+                        </table>             
                         </div>
-                </section>
-                </React.Fragment>
-
-
-            );
-        }
-    }
-}
-
-export default ProducerList;
+        )}}}
+export default ListOder_DS;

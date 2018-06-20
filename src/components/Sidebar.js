@@ -60,9 +60,9 @@ export default class Sidebar extends Component {
                         </Link>
                         </li>
                         <li>
-                            <Link to="/listOder">
+                            <Link to="/OderList">
                                 <i className="fa fa-pie-chart"></i>
-                                <span>Danh sách đơn hàng</span>
+                                <span>Quản lí đơn hàng</span>
                                 <span className="pull-right-container">
                             </span>
                             </Link>
